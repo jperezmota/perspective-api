@@ -1,13 +1,16 @@
 package com.jonathanperez.perspective.service;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jonathanperez.perspective.dto.PerspectiveDTO;
 import com.jonathanperez.perspective.entities.Perspective;
+import com.jonathanperez.perspective.repository.AuthorRepository;
 import com.jonathanperez.perspective.repository.PerspectiveRepository;
 
 @Service
@@ -16,6 +19,10 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 
 	@Autowired
 	private PerspectiveRepository perspectiveRepository;
+	@Autowired
+	private AuthorService authorService;
+	@Autowired
+	private CategoryService categoryService;
 	
 	@Override
 	public List<Perspective> getPerspectives() {
@@ -28,8 +35,26 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 	}
 
 	@Override
-	public void savePerspective(Perspective perspective) {
+	public Perspective savePerspective(PerspectiveDTO perspectiveDTO) {
+		Perspective perspective = new Perspective();
+		perspective.setPerspective(perspectiveDTO.perspective);
+		perspective.setAuthor(authorService.getAuthor(perspectiveDTO.authorId));
+		perspective.setCagetory(categoryService.getCategory(perspectiveDTO.categoryId));
+		perspective.setThoughts(perspectiveDTO.thoughts);
+		perspective.setCreatedBy("admin");
+		perspective.setCreatedDate(new Date());
+		
 		perspectiveRepository.savePerspective(perspective);
+		
+		return perspective;
+	}
+
+	@Override
+	public void deletePerspective(Perspective perspective) {
+		perspective.setDeleted(true);
+		perspective.setDeletedBy("admin");
+		perspective.setDeletedDate(new Date());
+		perspectiveRepository.updatePerspective(perspective);
 	}
 
 }

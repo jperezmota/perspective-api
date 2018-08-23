@@ -19,7 +19,7 @@ public class PerspectiveRepositoryImpl implements PerspectiveRepository{
 
  	@Override
 	public List<Perspective> getPerspectives() {
- 		Query query = em.createQuery("from Perspective", Perspective.class);
+ 		Query query = em.createQuery("from Perspective p where p.isDeleted = false", Perspective.class);
  		List<Perspective> perspectives = query.getResultList();
  		
 		return perspectives;
@@ -33,6 +33,12 @@ public class PerspectiveRepositoryImpl implements PerspectiveRepository{
 	@Override
 	public void savePerspective(Perspective perspective) {
 		em.persist(perspective);
+	}
+
+	@Override
+	public void updatePerspective(Perspective perspective) {
+		em.merge(perspective);
+		
 	}
 
 }

@@ -9,4 +9,5 @@ public interface PerspectiveRepository {
 	 public List<Perspective> getPerspectives();
 	 public Perspective getPerspective(long id);
 	 public void savePerspective(Perspective perspective);
+	 public void updatePerspective(Perspective perspective);
 }
