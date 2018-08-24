@@ -10,8 +10,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "authors")
+@JsonIgnoreProperties(value = {"createdBy", 
+        "createdDate", 
+        "lastModifiedBy", 
+        "lastModifiedDate", 
+        "deleted", 
+        "deletedBy", 
+        "deletedDate"})
 public class Author {
 
 	@Id
