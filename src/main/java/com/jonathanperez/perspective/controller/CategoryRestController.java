@@ -47,14 +47,13 @@ public class CategoryRestController {
 	}
 	
 	@PatchMapping("/categories/{id}")
-	public Category updateCategory(@RequestBody CategoryDTO categoryDTO, @PathVariable long id) {
+	public Category updateCategory(@Valid @RequestBody CategoryDTO categoryDTO, @PathVariable long id) {
 		return categoryService.updateCategory(categoryDTO, id);
 	}
 	
 	@DeleteMapping("/categories/{id}")
-	public String deleteCategory(@PathVariable long id) {
+	public void deleteCategory(@PathVariable long id) {
 		categoryService.deleteCategory(id);
-		return "Deleted";
 	}
 
 }

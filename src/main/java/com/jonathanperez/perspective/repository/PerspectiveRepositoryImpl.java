@@ -6,9 +6,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
+import com.jonathanperez.perspective.entities.Category;
 import com.jonathanperez.perspective.entities.Perspective;
 
 @Repository
@@ -27,7 +29,10 @@ public class PerspectiveRepositoryImpl implements PerspectiveRepository{
 
 	@Override
 	public Perspective getPerspective(long id) {
-		return em.find(Perspective.class, id);
+		TypedQuery<Perspective> query = em.createQuery("from Perspective p where p.id = :id and p.isDeleted = false", Perspective.class);
+		query.setParameter("id", id);
+		
+		return query.getSingleResult();
 	}
 
 	@Override

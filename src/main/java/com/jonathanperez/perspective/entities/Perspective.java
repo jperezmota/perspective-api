@@ -17,6 +17,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "perspectives")
+@JsonIgnoreProperties(value = {"createdBy", 
+        "createdDate", 
+        "lastModifiedBy", 
+        "lastModifiedDate", 
+        "deleted", 
+        "deletedBy", 
+        "deletedDate"})
 public class Perspective {
 	
 	@Id
@@ -25,7 +32,6 @@ public class Perspective {
 	
 	@Column(name = "perspective")
 	@NotNull
-	@Size(max = 20)
 	private String perspective;
 	
 	@OneToOne
@@ -63,15 +69,6 @@ public class Perspective {
 	private Date deletedDate;
 
 	public Perspective() {
-	}
-
-	public Perspective(String perspective, String thoughts,String createdBy,
-			Date createdDate) {
-		super();
-		this.perspective = perspective;
-		this.thoughts = thoughts;
-		this.createdBy = createdBy;
-		this.createdDate = createdDate;
 	}
 
 	public long getId() {
