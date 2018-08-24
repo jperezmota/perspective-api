@@ -1,7 +1,5 @@
 package com.jonathanperez.perspective.entities;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,7 +28,7 @@ public class Perspective extends Auditable<String>{
 	private long id;
 	
 	@Column(name = "perspective")
-	@NotNull
+	@NotBlank
 	private String perspective;
 	
 	@OneToOne
