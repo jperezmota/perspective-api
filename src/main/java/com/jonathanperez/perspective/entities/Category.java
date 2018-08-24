@@ -10,8 +10,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "categories")
+@JsonIgnoreProperties(value = {"createdBy", 
+		                      "createdDate", 
+		                      "lastModifiedBy", 
+		                      "lastModifiedDate", 
+		                      "deleted", 
+		                      "deletedBy", 
+		                      "deletedDate"})
 public class Category {
 	
 	@Id
@@ -134,5 +143,14 @@ public class Category {
 	public void setDeletedDate(Date deletedDate) {
 		this.deletedDate = deletedDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", createdBy=" + createdBy + ", createdDate=" + createdDate
+				+ ", lastModifiedBy=" + lastModifiedBy + ", lastModifiedDate=" + lastModifiedDate + ", isDeleted="
+				+ isDeleted + ", deletedBy=" + deletedBy + ", deletedDate=" + deletedDate + "]";
+	}
+	
+	
 	
 }
