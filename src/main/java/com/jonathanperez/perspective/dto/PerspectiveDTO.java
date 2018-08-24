@@ -15,7 +15,6 @@ import com.jonathanperez.perspective.entities.Author;
 import com.jonathanperez.perspective.entities.Category;
 
 public class PerspectiveDTO {
-	public long id;
 	@NotNull
 	public String perspective;
 	public long authorId;
@@ -24,9 +23,8 @@ public class PerspectiveDTO {
 	
 	@Override
 	public String toString() {
-		return "PerspectiveDTO [id=" + id + ", perspective=" + perspective + ", authorId=" + authorId + ", categoryId="
-				+ categoryId + ", thoughts=" + thoughts + "]";
+		return "PerspectiveDTO [perspective=" + perspective + ", authorId=" + authorId + ", categoryId=" + categoryId
+				+ ", thoughts=" + thoughts + "]";
 	}
-	
 	
 }

@@ -62,7 +62,9 @@ public class CategoryServiceImpl implements CategoryService {
 		try {
 			Category category = categoryRepository.getCategory(id);
 			category.setName(categoryDTO.name);
-			categoryRepository.saveCategory(category);
+			category.setLastModifiedBy("admin");
+			category.setLastModifiedDate(new Date());
+			categoryRepository.updateCategory(category);
 			
 			return category;
 		}catch(EmptyResultDataAccessException ex) {

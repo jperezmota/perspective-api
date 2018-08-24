@@ -10,7 +10,8 @@ public interface PerspectiveService {
 	
 	public List<Perspective> getPerspectives();
 	public Perspective getPerspective(long id);
-	public Perspective savePerspective(PerspectiveDTO perspectiveDTO);
-	public void deletePerspective(Perspective perspective);
+	public Perspective createPerspective(PerspectiveDTO perspectiveDTO);
+	public void deletePerspective(long id);
+	public Perspective updatePerspective(PerspectiveDTO perspectiveDTO, long id);
 	
 }
