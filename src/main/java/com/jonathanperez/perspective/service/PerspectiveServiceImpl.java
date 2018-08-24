@@ -46,8 +46,8 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 	public Perspective createPerspective(PerspectiveDTO perspectiveDTO) {
 		Perspective perspective = new Perspective();
 		perspective.setPerspective(perspectiveDTO.perspective);
-		perspective.setAuthor(authorService.getAuthor(perspectiveDTO.authorId));
-		perspective.setCagetory(categoryService.getCategory(perspectiveDTO.categoryId));
+		perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorService.getAuthor(perspectiveDTO.authorId));
+		perspective.setCagetory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
 		perspective.setThoughts(perspectiveDTO.thoughts);
 		perspective.setCreatedBy("admin");
 		perspective.setCreatedDate(new Date());
@@ -77,8 +77,8 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 			System.out.println("BAJANDO CON: " + id);
 			Perspective perspective = perspectiveRepository.getPerspective(id);
 			perspective.setPerspective(perspectiveDTO.perspective);
-			perspective.setAuthor(authorService.getAuthor(perspectiveDTO.authorId));
-			perspective.setCagetory(categoryService.getCategory(perspectiveDTO.categoryId));
+			perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorService.getAuthor(perspectiveDTO.authorId));
+			perspective.setCagetory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
 			perspective.setThoughts(perspectiveDTO.thoughts);
 			perspective.setLastModifiedBy("admin");
 			perspective.setLastModifiedDate(new Date());

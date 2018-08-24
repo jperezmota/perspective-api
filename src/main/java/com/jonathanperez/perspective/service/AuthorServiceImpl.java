@@ -39,8 +39,6 @@ public class AuthorServiceImpl implements AuthorService {
 
 	@Override
 	public void createAuthor(Author author) {
-		author.setCreatedBy("admin");
-		author.setCreatedDate(new Date());
 		authorRepository.saveAuthor(author);
 	}
 
@@ -49,8 +47,6 @@ public class AuthorServiceImpl implements AuthorService {
 		try {
 			Author author = authorRepository.getAuthor(id);
 			author.setName(authorDTO.name);
-			author.setLastModifiedBy("admin");
-			author.setLastModifiedDate(new Date());
 			authorRepository.updateAuthor(author);
 			
 			return author;
