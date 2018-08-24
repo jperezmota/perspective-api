@@ -5,16 +5,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.jonathanperez.perspective.dto.CustomErrorResponse;
+import com.jonathanperez.perspective.dto.CustomErrorResponseDTO;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
 
 @ControllerAdvice
 public class RestExceptionHandlerController {
 	
 	@ExceptionHandler
-	public ResponseEntity<CustomErrorResponse> handleException(ResourceNotFoundException exception){
+	public ResponseEntity<CustomErrorResponseDTO> handleException(ResourceNotFoundException exception){
 		
-		CustomErrorResponse customErrorResponse = new CustomErrorResponse(HttpStatus.NOT_FOUND.value(), 
+		CustomErrorResponseDTO customErrorResponse = new CustomErrorResponseDTO(HttpStatus.NOT_FOUND.value(), 
 																		exception.getMessage(), 
 																		System.currentTimeMillis());
 		
@@ -23,9 +23,9 @@ public class RestExceptionHandlerController {
 	}
 	
 	@ExceptionHandler
-	public ResponseEntity<CustomErrorResponse> handleException(Exception exception){
+	public ResponseEntity<CustomErrorResponseDTO> handleException(Exception exception){
 		
-		CustomErrorResponse customErrorResponse = new CustomErrorResponse(HttpStatus.BAD_REQUEST.value(), 
+		CustomErrorResponseDTO customErrorResponse = new CustomErrorResponseDTO(HttpStatus.BAD_REQUEST.value(), 
 																		exception.getMessage(), 
 																		System.currentTimeMillis());
 		
