@@ -1,6 +1,5 @@
 package com.jonathanperez.perspective.service;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -9,12 +8,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jonathanperez.perspective.dto.CategoryDTO;
 import com.jonathanperez.perspective.dto.PerspectiveDTO;
-import com.jonathanperez.perspective.entities.Category;
 import com.jonathanperez.perspective.entities.Perspective;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
-import com.jonathanperez.perspective.repository.AuthorRepository;
 import com.jonathanperez.perspective.repository.PerspectiveRepository;
 
 @Service
