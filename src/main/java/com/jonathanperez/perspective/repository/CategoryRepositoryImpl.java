@@ -18,16 +18,18 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 	private EntityManager em;
 
 	@Override
-	public Category getCategory(long id) {
-		TypedQuery<Category> query = em.createQuery("from Category c where c.id = :id and c.isDeleted = false", Category.class);
+	public Category getCategory(long id, String username) {
+		TypedQuery<Category> query = em.createQuery("from Category c where c.id = :id and c.createdBy = :createdBy and c.isDeleted = false", Category.class);
 		query.setParameter("id", id);
+		query.setParameter("createdBy", username);
 		
 		return query.getSingleResult();
 	}
 
 	@Override
-	public List<Category> getCategories() {
-		Query query = em.createQuery("from Category p where p.isDeleted = false", Category.class);
+	public List<Category> getCategories(String username) {
+		Query query = em.createQuery("from Category c where c.createdBy = :createdBy and c.isDeleted = false", Category.class);
+		query.setParameter("createdBy", username);
  		List<Category> categories = query.getResultList();
  		
 		return categories;

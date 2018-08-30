@@ -7,12 +7,14 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.jonathanperez.perspective.dto.CategoryDTO;
 import com.jonathanperez.perspective.entities.Category;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
 import com.jonathanperez.perspective.repository.CategoryRepository;
+import com.jonathanperez.perspective.util.UserSessionUtil;
 
 @Service
 @Transactional
@@ -24,7 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Category getCategory(long id) {
 		try {
-			return categoryRepository.getCategory(id);
+			return categoryRepository.getCategory(id, UserSessionUtil.getUsername());
 		}catch(EmptyResultDataAccessException ex) {
 			throw new ResourceNotFoundException("Category", "Id", id);
 		}	
@@ -32,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public List<Category> getCategories() {
-		return categoryRepository.getCategories();
+		return categoryRepository.getCategories(UserSessionUtil.getUsername());
 	}
 
 	@Override
@@ -45,7 +47,8 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public void deleteCategory(long id) {
 		try {
-			Category category = categoryRepository.getCategory(id);	
+			
+			Category category = categoryRepository.getCategory(id, UserSessionUtil.getUsername());	
 			category.setDeleted(true);
 			category.setDeletedBy("admin");
 			category.setDeletedDate(new Date());
@@ -58,7 +61,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Category updateCategory(CategoryDTO categoryDTO, long id) {
 		try {
-			Category category = categoryRepository.getCategory(id);
+			Category category = categoryRepository.getCategory(id, UserSessionUtil.getUsername());
 			category.setName(categoryDTO.name);
 			category.setLastModifiedBy("admin");
 			category.setLastModifiedDate(new Date());
