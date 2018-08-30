@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.config;
+package com.jonathanperez.perspective.config.jpa;
 
 import java.util.Optional;
 
@@ -16,7 +16,7 @@ public class JpaAuditingConfiguration {
 	@Bean
 	public AuditorAware<String> auditorProvider(){
 		return () -> {
-			String username = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+			String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 			return Optional.ofNullable(username);
 		};
 	}
