@@ -13,6 +13,7 @@ import com.jonathanperez.perspective.dto.AuthorDTO;
 import com.jonathanperez.perspective.entities.Author;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
 import com.jonathanperez.perspective.repository.AuthorRepository;
+import com.jonathanperez.perspective.util.UserSessionUtil;
 
 @Service
 @Transactional
@@ -24,7 +25,7 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public Author getAuthor(long id) {
 		try {
-			return authorRepository.getAuthor(id);
+			return authorRepository.getAuthor(id, UserSessionUtil.getUsername());
 		}catch(EmptyResultDataAccessException ex) {
 			throw new ResourceNotFoundException("Author", "Id", id);
 		}
@@ -32,7 +33,7 @@ public class AuthorServiceImpl implements AuthorService {
 
 	@Override
 	public List<Author> getAuthors() {
-		return authorRepository.getAuthors();
+		return authorRepository.getAuthors(UserSessionUtil.getUsername());
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public Author updateAuthor(AuthorDTO authorDTO, long id) {
 		try {
-			Author author = authorRepository.getAuthor(id);
+			Author author = authorRepository.getAuthor(id, UserSessionUtil.getUsername());
 			author.setName(authorDTO.name);
 			authorRepository.updateAuthor(author);
 			
@@ -56,7 +57,7 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public void deleteAuthor(long id) {
 		try {
-			Author author = authorRepository.getAuthor(id);	
+			Author author = authorRepository.getAuthor(id, UserSessionUtil.getUsername());	
 			author.setDeleted(true);
 			author.setDeletedBy("admin");
 			author.setDeletedDate(new Date());

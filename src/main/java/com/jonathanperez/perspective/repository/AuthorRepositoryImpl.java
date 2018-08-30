@@ -18,16 +18,18 @@ public class AuthorRepositoryImpl implements AuthorRepository {
 	private EntityManager em;
 
 	@Override
-	public Author getAuthor(long id) {
-		TypedQuery<Author> query = em.createQuery("from Author a where a.id = :id and a.isDeleted = false", Author.class);
+	public Author getAuthor(long id, String username) {
+		TypedQuery<Author> query = em.createQuery("from Author a where a.id = :id and a.createdBy = :createdBy and a.isDeleted = false", Author.class);
+		query.setParameter("createdBy", username);
 		query.setParameter("id", id);
 		
 		return query.getSingleResult();
 	}
 
 	@Override
-	public List<Author> getAuthors() {
-		Query query = em.createQuery("from Author a where a.isDeleted = false", Author.class);
+	public List<Author> getAuthors(String username) {
+		Query query = em.createQuery("from Author a where a.createdBy = :createdBy and a.isDeleted = false", Author.class);
+		query.setParameter("createdBy", username);
  		List<Author> authors = query.getResultList();
  		
 		return authors;
