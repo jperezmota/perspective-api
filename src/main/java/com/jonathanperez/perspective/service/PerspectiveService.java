@@ -1,6 +1,5 @@
 package com.jonathanperez.perspective.service;
 
-import java.util.Collection;
 import java.util.List;
 
 import com.jonathanperez.perspective.dto.PerspectiveDTO;
