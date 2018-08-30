@@ -3,13 +3,11 @@ package com.jonathanperez.perspective.service;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.jonathanperez.perspective.dto.CategoryDTO;
 import com.jonathanperez.perspective.entities.Category;

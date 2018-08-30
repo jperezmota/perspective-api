@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jonathanperez.perspective.dto.UserDTO;
 import com.jonathanperez.perspective.entities.User;
 import com.jonathanperez.perspective.service.SecurityService;
-import com.jonathanperez.perspective.service.UserService;
 
 @RestController
 @RequestMapping("/api")

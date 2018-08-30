@@ -1,6 +1,5 @@
 package com.jonathanperez.perspective.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,13 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jonathanperez.perspective.dto.CategoryDTO;
 import com.jonathanperez.perspective.dto.PerspectiveDTO;
-import com.jonathanperez.perspective.entities.Category;
 import com.jonathanperez.perspective.entities.Perspective;
-import com.jonathanperez.perspective.exception.ResourceNotFoundException;
 import com.jonathanperez.perspective.service.PerspectiveService;
-import com.jonathanperez.perspective.service.PerspectiveServiceImpl;
 
 @RestController
 @RequestMapping("/api")

@@ -3,7 +3,6 @@ package com.jonathanperez.perspective.repository;
 import java.util.List;
 
 import com.jonathanperez.perspective.entities.Author;
-import com.jonathanperez.perspective.entities.Category;
 
 public interface AuthorRepository {
 	public List<Author> getAuthors();
