@@ -1,6 +1,5 @@
 package com.jonathanperez.perspective.repository;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
-import com.jonathanperez.perspective.entities.Category;
 import com.jonathanperez.perspective.entities.Perspective;
 
 @Repository
