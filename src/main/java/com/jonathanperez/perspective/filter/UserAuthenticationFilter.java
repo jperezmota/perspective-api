@@ -19,7 +19,7 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 
 		Authentication currentAuthentication = SecurityContextHolder.getContext().getAuthentication();
-		if(currentAuthentication == null) {
+		if(currentAuthentication == null && !request.getRequestURI().equals("/api/securities")) {
 			String userToken = request.getHeader("Authorization");
 			Authentication preAuthenticatedAuthenticationToken = new PreAuthenticatedAuthenticationToken(userToken, null); 
 			SecurityContextHolder.getContext().setAuthentication(preAuthenticatedAuthenticationToken);  
