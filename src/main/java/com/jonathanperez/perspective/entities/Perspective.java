@@ -37,7 +37,7 @@ public class Perspective extends Auditable<String>{
 	
 	@OneToOne
 	@JoinColumn(name = "category_id")
-	private Category cagetory;
+	private Category category;
 	
 	@Column(name = "thoughts")
 	private String thoughts;
@@ -77,11 +77,11 @@ public class Perspective extends Auditable<String>{
 		this.author = author;
 	}
 
-	public Category getCagetory() {
-		return cagetory;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCagetory(Category cagetory) {
-		this.cagetory = cagetory;
+	public void setCategory(Category cagetory) {
+		this.category = cagetory;
 	}
 }
