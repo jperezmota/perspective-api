@@ -43,7 +43,7 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 		Perspective perspective = new Perspective();
 		perspective.setPerspective(perspectiveDTO.perspective);
 		perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorService.getAuthor(perspectiveDTO.authorId));
-		perspective.setCagetory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
+		perspective.setCategory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
 		perspective.setThoughts(perspectiveDTO.thoughts);
 		perspective.setCreatedBy("admin");
 		perspective.setCreatedDate(new Date());
@@ -69,12 +69,10 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 	@Override
 	public Perspective updatePerspective(PerspectiveDTO perspectiveDTO, long id) {
 		try {
-			
-			System.out.println("BAJANDO CON: " + id);
 			Perspective perspective = perspectiveRepository.getPerspective(id);
 			perspective.setPerspective(perspectiveDTO.perspective);
 			perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorService.getAuthor(perspectiveDTO.authorId));
-			perspective.setCagetory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
+			perspective.setCategory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
 			perspective.setThoughts(perspectiveDTO.thoughts);
 			perspective.setLastModifiedBy("admin");
 			perspective.setLastModifiedDate(new Date());
@@ -83,7 +81,6 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 			
 			return perspective;
 		}catch(EmptyResultDataAccessException ex) {
-			System.out.println("TIRANDO CON: " + id);
 	 		throw new ResourceNotFoundException("Perspective", "Id", id);
 	 	}
 	}
