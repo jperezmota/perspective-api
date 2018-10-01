@@ -8,7 +8,7 @@ A RESTful API to have all your personal development perspectives in one place! N
 
 ### Front-End Web App
 
-The above image correspond to the web app that use this API. This application can be found in the following link: [Perspective Web App](https://github.com/jperezmota/perspective-web-app)
+The above image corresponds to the web app that uses this API. This application can be found in the following link: [Perspective Web App](https://github.com/jperezmota/perspective-web-app)
 
 ## Built With
 
