@@ -1,8 +1,5 @@
 # Perspective API
 
-hola 
-como 
-estas
 A RESTful API to have all your personal development perspectives in one place! No more missed Perspectives or difficulty in finding them in notebooks or scattered sticky notes.
 
 <p align="center">
@@ -37,16 +34,16 @@ In order to access the API Endpoints you a ``Token`` which is obtained by authen
 
 ### Securities Endpoint
 
-**Method:** POST <br>
-**URL:** http://localhost:8080/api/securities <br>
-**Body:**
+Request Method: POST
+Request URL: http://localhost:8080/api/securities
+Request Body:
 ```
 {
     "username": "admin",
     "password": "admin"
 }
 ```
-**Response:**
+Response Body:
 ```
 {
     "username": "admin",
@@ -60,7 +57,7 @@ In order to access the API Endpoints you a ``Token`` which is obtained by authen
     ]
 }
 ```
-**Error:**
+Error Response Body:
 ```
 {
     "status": 404,
@@ -69,11 +66,79 @@ In order to access the API Endpoints you a ``Token`` which is obtained by authen
 }
 ```
 
-### Perspectives
+## Authorization Header
 
-List
+All requests to the endpoints below should include the ``Authorization`` http header which value has to be the ``Token`` you obtained from authenticating.
 
-http://localhost:8080/api/perspectives
+| Http Header   | Value         |
+| ------------- | ------------- |
+| Authorization | Your Token    |
+
+### Perspectives Endpoint
+
+**Create a Perspective** <br>
+Request Method: POST <br>
+Request URL: http://localhost:8080/api/perspectives
+
+**Modify a Perspective** <br>
+Request Method: PATCH <br>
+Request URL: http://localhost:8080/api/perspectives/:id
+
+**List Perspectives** <br>
+Request Method: GET <br>
+Request URL: http://localhost:8080/api/perspectives
+
+**Get a single Perspective** <br>
+Request Method: GET <br>
+Request URL: http://localhost:8080/api/perspectives/:id
+
+**Delete a single Perspective** <br>
+Request Method: GET <br>
+Request URL: http://localhost:8080/api/perspectives/:id
+
+### Authors Endpoint
+
+**Create a Author** <br>
+Request Method: POST <br>
+Request URL: http://localhost:8080/api/authors
+
+**Modify a Author** <br>
+Method: PATCH <br>
+URL: http://localhost:8080/api/authors/:id
+
+**List Authors** <br>
+Request Method: GET <br>
+Request URL: http://localhost:8080/api/authors
+
+**Get a single Author** <br>
+Request Method: GET <br>
+Request URL: http://localhost:8080/api/authors/:id
+
+**Delete a single Author** <br>
+Request Method: GET <br>
+Request URL: http://localhost:8080/api/authors/:id
+
+### Categories Endpoint
+
+**Create a Category** <br>
+Request Method: POST <br>
+URL: http://localhost:8080/api/categories
+
+**Modify a Category** <br>
+Request Method: PATCH <br>
+Request URL: http://localhost:8080/api/categories/:id
+
+**List Categories** <br>
+Request Method: GET <br>
+Request URL: http://localhost:8080/api/categories
+
+**Get a single Category** <br>
+Request Method: GET <br>
+Request URL: http://localhost:8080/api/categories/:id
+
+**Delete a single Category** <br>
+Request Method: GET <br>
+Request URL: http://localhost:8080/api/categories/:id
 
 ## Contributing
 
