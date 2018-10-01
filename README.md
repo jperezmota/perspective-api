@@ -30,12 +30,12 @@ git clone https://github.com/jperezmota/perspective-api.git
 
 ## Authentication
 
-In order to access the API Endpoints you a ``Token`` which is obtained by authenticating your account through the following endpoint:
+In order to access the API Endpoints you need a ``Token`` which is obtained by authenticating your account through the following endpoint:
 
 ### Securities Endpoint
 
-Request Method: POST
-Request URL: http://localhost:8080/api/securities
+Request Method: POST <br>
+Request URL: http://localhost:8080/api/securities <br>
 Request Body:
 ```
 {
