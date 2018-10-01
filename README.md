@@ -28,6 +28,10 @@ git clone https://github.com/jperezmota/perspective-api.git
 
 3. Either run the project through your IDE or inside the project root directory run the following command: `./mvnw spring-boot: run`
 
+## Contributing
+
+Please take a look at our [contributing](https://github.com/jperezmota/perspective-api/blob/master/CONTRIBUTING.md) guidelines if you're interested in helping!
+
 #### Pending Features
 
 Pending features are listed here: [Issues](https://github.com/jperezmota/perspective-api/issues)
