@@ -1,5 +1,8 @@
 # Perspective API
 
+hola 
+como 
+estas
 A RESTful API to have all your personal development perspectives in one place! No more missed Perspectives or difficulty in finding them in notebooks or scattered sticky notes.
 
 <p align="center">
@@ -27,6 +30,50 @@ git clone https://github.com/jperezmota/perspective-api.git
 2. Import the Maven project to your IDE
 
 3. Either run the project through your IDE or inside the project root directory run the following command: `./mvnw spring-boot: run`
+
+## Authentication
+
+In order to access the API Endpoints you a ``Token`` which is obtained by authenticating your account through the following endpoint:
+
+### Securities Endpoint
+
+**Method:** POST <br>
+**URL:** http://localhost:8080/api/securities <br>
+**Body:**
+```
+{
+    "username": "admin",
+    "password": "admin"
+}
+```
+**Response:**
+```
+{
+    "username": "admin",
+    "password": "$2a$04$tI.B0ZrrEcP4ejGKHJboVuRIOFU4MsnjBw/VUr.TdlvTa0jQeCSBO",
+    "token": "asdasdaWEwe12231344",
+    "enabled": true,
+    "authorities": [
+        {
+            "authority": "ROLE_ADMIN"
+        }
+    ]
+}
+```
+**Error:**
+```
+{
+    "status": 404,
+    "message": "User not found with those credential ",
+    "timestamp": 1538420595089
+}
+```
+
+### Perspectives
+
+List
+
+http://localhost:8080/api/perspectives
 
 ## Contributing
 
