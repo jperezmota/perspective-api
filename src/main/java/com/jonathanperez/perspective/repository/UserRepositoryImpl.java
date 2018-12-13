@@ -26,4 +26,21 @@ public class UserRepositoryImpl implements UserRepository {
 		return typedQuery.getSingleResult();
 	}
 
+	@Override
+	public void saveUser(User user) {
+		em.persist(user);
+	}
+	
+	@Override
+	public void updateUser(User user) {
+		em.merge(user);
+	}
+
+	@Override
+	public User findUserByEmail(String email) {
+		TypedQuery<User> query = em.createQuery("from User u where u.email =:email", User.class);
+		query.setParameter("email", email);
+		return query.getSingleResult();
+	}
+
 }

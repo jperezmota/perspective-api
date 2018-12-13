@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.jonathanperez.perspective.dto.UserCreationDTO;
 import com.jonathanperez.perspective.entities.User;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
 
@@ -36,6 +37,11 @@ public class SecurityServiceImpl implements SecurityService {
 		
 		return user;
 	
+	}
+
+	@Override
+	public User createUser(UserCreationDTO userCreationDTO) {
+		return null;
 	}
 
 }

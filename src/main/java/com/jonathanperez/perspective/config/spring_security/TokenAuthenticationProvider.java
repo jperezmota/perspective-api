@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,6 +31,11 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         try {
+        		boolean tokenNotSent = authentication.getPrincipal() == null;
+        		if(tokenNotSent) {
+        			throw new BadCredentialsException("Token not found.");
+        		}
+        		
         		String userToken = authentication.getPrincipal().toString();
         		User user = userRepository.findUserByToken(userToken);
         		validateUser(user);

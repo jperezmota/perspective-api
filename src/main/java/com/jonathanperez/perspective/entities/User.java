@@ -1,5 +1,6 @@
 package com.jonathanperez.perspective.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -23,6 +25,11 @@ public class User {
 	@Column(name="password")
 	@NotBlank
 	private String password;
+	
+	@Column(name="email")
+	@NotBlank
+	@Email
+	private String email;
 	
 	@Column(name = "token")
 	@NotBlank
@@ -53,6 +60,14 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getToken() {
 		return token;
@@ -76,6 +91,13 @@ public class User {
 
 	public void setAuthorities(List<Authority> authorities) {
 		this.authorities = authorities;
+	}
+	
+	public void addAuthority(Authority authority) {
+		if(authorities == null) {
+			authorities = new ArrayList<>();
+		}
+		authorities.add(authority);
 	}
 
 }

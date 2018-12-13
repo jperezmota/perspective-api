@@ -1,6 +1,6 @@
 insert into users
 values 
-('admin','$2a$04$tI.B0ZrrEcP4ejGKHJboVuRIOFU4MsnjBw/VUr.TdlvTa0jQeCSBO', 'asdasdaWEwe12231344',1);
+('admin','$2a$04$tI.B0ZrrEcP4ejGKHJboVuRIOFU4MsnjBw/VUr.TdlvTa0jQeCSBO', 'testing@gmail.com', 'asdasdaWEwe12231344',1);
 
 insert into authorities 
 values 

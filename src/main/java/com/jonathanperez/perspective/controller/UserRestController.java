@@ -10,22 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jonathanperez.perspective.dto.UserCreationDTO;
-import com.jonathanperez.perspective.dto.UserDTO;
 import com.jonathanperez.perspective.entities.User;
-import com.jonathanperez.perspective.service.SecurityService;
+import com.jonathanperez.perspective.service.UserService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("api")
 @CrossOrigin
-public class SecurityRestController {
-	
+public class UserRestController {
+
 	@Autowired
-	private SecurityService securityService;
+	private UserService userService;
 	
-	@PostMapping("/securities")
-	public User authenticateUser(@Valid @RequestBody UserDTO userDTO) {
-		User user = securityService.authenticateUser(userDTO.username, userDTO.password);
-		return user;
+	@PostMapping("/users")
+	public User createUser(@Valid @RequestBody UserCreationDTO userCreationDTO) {
+		return userService.createUser(userCreationDTO);
 	}
-	
 }
