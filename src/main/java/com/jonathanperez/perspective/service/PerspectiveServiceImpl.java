@@ -3,6 +3,9 @@ package com.jonathanperez.perspective.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,7 @@ import com.jonathanperez.perspective.dto.PerspectiveDTO;
 import com.jonathanperez.perspective.entities.Perspective;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
 import com.jonathanperez.perspective.repository.PerspectiveRepository;
+import com.jonathanperez.perspective.util.UserSessionUtil;
 
 @Service
 @Transactional
@@ -40,12 +44,18 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 
 	@Override
 	public Perspective createPerspective(PerspectiveDTO perspectiveDTO) {
+		boolean perspectiveTitleAlreadyExists = verifyPerspectiveTitleExistance(perspectiveDTO.title);
+		if(perspectiveTitleAlreadyExists) {
+			throw new ValidationException("Perspective title: "+ perspectiveDTO.title+", already exists.");
+		}
+		
 		Perspective perspective = new Perspective();
+		perspective.setTitle(perspectiveDTO.title);
 		perspective.setPerspective(perspectiveDTO.perspective);
 		perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorService.getAuthor(perspectiveDTO.authorId));
 		perspective.setCategory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
 		perspective.setThoughts(perspectiveDTO.thoughts);
-		perspective.setCreatedBy("admin");
+		perspective.setCreatedBy(UserSessionUtil.getUsername());
 		perspective.setCreatedDate(new Date());
 		
 		perspectiveRepository.savePerspective(perspective);
@@ -58,23 +68,28 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 		try {
 			Perspective perspective = perspectiveRepository.getPerspective(id);
 			perspective.setDeleted(true);
-			perspective.setDeletedBy("admin");
+			perspective.setDeletedBy(UserSessionUtil.getUsername());
 			perspective.setDeletedDate(new Date());
 			perspectiveRepository.updatePerspective(perspective);
 	 	}catch(EmptyResultDataAccessException ex) {
-	 		throw new ResourceNotFoundException("Category", "Id", id);
+	 		throw new ResourceNotFoundException("Perspective", "Id", id);
 	 	}	
 	}
 
 	@Override
 	public Perspective updatePerspective(PerspectiveDTO perspectiveDTO, long id) {
 		try {
+			boolean perspectiveTitleAlreadyExists = verifyPerspectiveTitleExistance(perspectiveDTO.title, id);
+			if(perspectiveTitleAlreadyExists) {
+				throw new ValidationException("Perspective title: "+ perspectiveDTO.title+", already exists.");
+			}
+			
 			Perspective perspective = perspectiveRepository.getPerspective(id);
 			perspective.setPerspective(perspectiveDTO.perspective);
 			perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorService.getAuthor(perspectiveDTO.authorId));
 			perspective.setCategory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
 			perspective.setThoughts(perspectiveDTO.thoughts);
-			perspective.setLastModifiedBy("admin");
+			perspective.setLastModifiedBy(UserSessionUtil.getUsername());
 			perspective.setLastModifiedDate(new Date());
 			
 			perspectiveRepository.updatePerspective(perspective);
@@ -83,6 +98,28 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 		}catch(EmptyResultDataAccessException ex) {
 	 		throw new ResourceNotFoundException("Perspective", "Id", id);
 	 	}
+	}
+
+	@Override
+	public boolean verifyPerspectiveTitleExistance(String title) {
+		try{
+			perspectiveRepository.findPerspectiveByTitle(title);
+			return true;
+		}
+		catch(EmptyResultDataAccessException ex) {
+	 		return false;
+	 	}	
+	}
+
+	@Override
+	public boolean verifyPerspectiveTitleExistance(String title, long idToExclude) {
+		try{
+			perspectiveRepository.findPerspectiveByTitle(title, idToExclude);
+			return true;
+		}
+		catch(EmptyResultDataAccessException ex) {
+	 		return false;
+	 	}	
 	}
 	
 }

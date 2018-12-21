@@ -1,5 +1,7 @@
 package com.jonathanperez.perspective.controller;
 
+import javax.validation.ValidationException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -30,6 +32,13 @@ public class RestExceptionHandlerController {
 																		System.currentTimeMillis());
 		
 		return new ResponseEntity<>(customErrorResponse, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler
+	public ResponseEntity<CustomErrorResponseDTO> handleValidationException(ValidationException validationException) {
+		CustomErrorResponseDTO customErrorResponseDTO = new CustomErrorResponseDTO(HttpStatus.UNPROCESSABLE_ENTITY.value(),
+															validationException.getMessage(), System.currentTimeMillis());
+		return new ResponseEntity<>(customErrorResponseDTO, HttpStatus.UNPROCESSABLE_ENTITY);
 	}
 
 }

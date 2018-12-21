@@ -1,8 +1,8 @@
 package com.jonathanperez.perspective.dto;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 public class CategoryDTO {
-	@NotNull
+	@NotBlank
 	public String name;
 }

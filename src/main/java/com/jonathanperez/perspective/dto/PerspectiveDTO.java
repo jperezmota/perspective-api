@@ -1,9 +1,13 @@
 package com.jonathanperez.perspective.dto;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class PerspectiveDTO {
-	@NotNull
+	
+	@NotBlank
+	public String title;
+	@NotBlank
 	public String perspective;
 	public long authorId;
 	public long categoryId;
@@ -11,8 +15,8 @@ public class PerspectiveDTO {
 	
 	@Override
 	public String toString() {
-		return "PerspectiveDTO [perspective=" + perspective + ", authorId=" + authorId + ", categoryId=" + categoryId
-				+ ", thoughts=" + thoughts + "]";
+		return "PerspectiveDTO [title=" + title + ", perspective=" + perspective + ", authorId=" + authorId
+				+ ", categoryId=" + categoryId + ", thoughts=" + thoughts + "]";
 	}
 	
 }
