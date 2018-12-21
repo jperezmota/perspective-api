@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -27,8 +28,14 @@ public class Perspective extends Auditable<String>{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@Column(name = "title")
+	@NotBlank
+	@Size(min = 1, max = 40)
+	private String title;
+	
 	@Column(name = "perspective")
 	@NotBlank
+	@Size(min = 1, max = 1000)
 	private String perspective;
 	
 	@OneToOne
@@ -51,6 +58,14 @@ public class Perspective extends Auditable<String>{
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getPerspective() {

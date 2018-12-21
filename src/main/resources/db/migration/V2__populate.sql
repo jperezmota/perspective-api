@@ -22,7 +22,7 @@ values
 ('Relationship', 'admin', curdate());
 
 insert into perspectives 
-(perspective, author_id, category_id, created_by, created_date) 
+(title, perspective, author_id, category_id, created_by, created_date) 
 values 
-("You didn't lose your motivation. You stopped focusing on what you are fighting for.", 1, 3, 'admin', curdate()),
-("Is not what you want, is what you deserve by giving.", 2, 3, 'admin', curdate());
+("You didn't lose your motication", "You didn't lose your motivation. You stopped focusing on what you are fighting for.", 1, 3, 'admin', curdate()),
+("Is not what you want", "Is not what you want, is what you deserve by giving.", 2, 3, 'admin', curdate());

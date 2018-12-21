@@ -9,4 +9,6 @@ public interface PerspectiveRepository {
 	 public Perspective getPerspective(long id);
 	 public void savePerspective(Perspective perspective);
 	 public void updatePerspective(Perspective perspective);
+	 public Perspective findPerspectiveByTitle(String title);
+	 public Perspective findPerspectiveByTitle(String title, long idToExclude);
 }

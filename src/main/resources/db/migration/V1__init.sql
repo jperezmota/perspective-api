@@ -42,6 +42,7 @@ create table categories(
 
 create table perspectives(
 	id bigint(20) not null auto_increment,
+	title varchar(40) not null,
 	perspective varchar(1000) not null,
 	author_id bigint(20),
 	category_id bigint(20),

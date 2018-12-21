@@ -12,5 +12,7 @@ public interface PerspectiveService {
 	public Perspective createPerspective(PerspectiveDTO perspectiveDTO);
 	public void deletePerspective(long id);
 	public Perspective updatePerspective(PerspectiveDTO perspectiveDTO, long id);
+	public boolean verifyPerspectiveTitleExistance(String title);
+	public boolean verifyPerspectiveTitleExistance(String title, long idToExclude);
 	
 }
