@@ -16,14 +16,18 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class Auditable<T> {
+	
+	interface AuditLogValidation {
+
+	}
 
 	@Column(name = "created_by")
-	@NotNull
+	@NotNull(groups = AuditLogValidation.class)
 	@CreatedBy
 	private T createdBy;
 	
 	@Column(name = "created_date")
-	@NotNull
+	@NotNull(groups = AuditLogValidation.class)
 	@CreatedDate
 	private Date createdDate;
 	

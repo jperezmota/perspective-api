@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jonathanperez.perspective.dto.CategoryDTO;
 import com.jonathanperez.perspective.entities.Category;
 import com.jonathanperez.perspective.service.CategoryService;
 
@@ -46,8 +45,8 @@ public class CategoryRestController {
 	}
 	
 	@PatchMapping("/categories/{id}")
-	public Category updateCategory(@Valid @RequestBody CategoryDTO categoryDTO, @PathVariable long id) {
-		return categoryService.updateCategory(categoryDTO, id);
+	public Category updateCategory(@Valid @RequestBody Category category, @PathVariable long id) {
+		return categoryService.updateCategory(category, id);
 	}
 	
 	@DeleteMapping("/categories/{id}")
