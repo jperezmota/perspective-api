@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.service;
+package com.jonathanperez.perspective.authormodule.services;
 
 import java.util.Date;
 import java.util.List;
@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.jonathanperez.perspective.entities.Author;
+import com.jonathanperez.perspective.authormodule.entities.Author;
+import com.jonathanperez.perspective.authormodule.repositories.AuthorRepository;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
-import com.jonathanperez.perspective.repository.AuthorRepository;
 import com.jonathanperez.perspective.util.UserSessionUtil;
 
 @Service

@@ -1,8 +1,8 @@
-package com.jonathanperez.perspective.service;
+package com.jonathanperez.perspective.authormodule.services;
 
 import java.util.List;
 
-import com.jonathanperez.perspective.entities.Author;
+import com.jonathanperez.perspective.authormodule.entities.Author;
 
 public interface AuthorService {
 	public List<Author> getAuthors();

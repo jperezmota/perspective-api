@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.repository;
+package com.jonathanperez.perspective.authormodule.repositories;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
-import com.jonathanperez.perspective.entities.Author;
+import com.jonathanperez.perspective.authormodule.entities.Author;
 
 @Repository
 public class AuthorRepositoryImpl implements AuthorRepository {

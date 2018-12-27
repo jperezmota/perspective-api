@@ -1,8 +1,8 @@
-package com.jonathanperez.perspective.repository;
+package com.jonathanperez.perspective.authormodule.repositories;
 
 import java.util.List;
 
-import com.jonathanperez.perspective.entities.Author;
+import com.jonathanperez.perspective.authormodule.entities.Author;
 import com.jonathanperez.perspective.entities.Category;
 
 public interface AuthorRepository {
