@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.service;
+package com.jonathanperez.perspective.perspectivemodule.services;
 
 import java.util.Date;
 import java.util.List;
@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jonathanperez.perspective.dto.PerspectiveDTO;
-import com.jonathanperez.perspective.entities.Perspective;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
-import com.jonathanperez.perspective.repository.PerspectiveRepository;
+import com.jonathanperez.perspective.perspectivemodule.entities.Perspective;
+import com.jonathanperez.perspective.perspectivemodule.repositories.PerspectiveRepository;
+import com.jonathanperez.perspective.service.AuthorService;
+import com.jonathanperez.perspective.service.CategoryService;
 import com.jonathanperez.perspective.util.UserSessionUtil;
 
 @Service

@@ -1,8 +1,8 @@
-package com.jonathanperez.perspective.repository;
+package com.jonathanperez.perspective.perspectivemodule.repositories;
 
 import java.util.List;
 
-import com.jonathanperez.perspective.entities.Perspective;
+import com.jonathanperez.perspective.perspectivemodule.entities.Perspective;
 
 public interface PerspectiveRepository {
 	 public List<Perspective> getPerspectives();

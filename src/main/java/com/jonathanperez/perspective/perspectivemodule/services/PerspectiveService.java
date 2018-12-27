@@ -1,9 +1,9 @@
-package com.jonathanperez.perspective.service;
+package com.jonathanperez.perspective.perspectivemodule.services;
 
 import java.util.List;
 
 import com.jonathanperez.perspective.dto.PerspectiveDTO;
-import com.jonathanperez.perspective.entities.Perspective;
+import com.jonathanperez.perspective.perspectivemodule.entities.Perspective;
 
 public interface PerspectiveService {
 	
