@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jonathanperez.perspective.dto.PerspectiveDTO;
+import com.jonathanperez.perspective.perspectivemodule.dtos.PerspectiveDTO;
 import com.jonathanperez.perspective.perspectivemodule.entities.Perspective;
 import com.jonathanperez.perspective.perspectivemodule.services.PerspectiveService;
 

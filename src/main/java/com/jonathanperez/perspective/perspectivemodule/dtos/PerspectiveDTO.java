@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.dto;
+package com.jonathanperez.perspective.perspectivemodule.dtos;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
