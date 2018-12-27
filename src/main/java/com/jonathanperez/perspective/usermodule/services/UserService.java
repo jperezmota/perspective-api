@@ -1,7 +1,7 @@
-package com.jonathanperez.perspective.service;
+package com.jonathanperez.perspective.usermodule.services;
 
-import com.jonathanperez.perspective.dto.UserCreationDTO;
-import com.jonathanperez.perspective.entities.User;
+import com.jonathanperez.perspective.usermodule.dtos.UserCreationDTO;
+import com.jonathanperez.perspective.usermodule.entities.User;
 
 public interface UserService {
 	public User findUserByUsername(String username);

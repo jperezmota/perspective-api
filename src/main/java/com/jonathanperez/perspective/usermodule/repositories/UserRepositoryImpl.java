@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.repository;
+package com.jonathanperez.perspective.usermodule.repositories;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -6,7 +6,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
-import com.jonathanperez.perspective.entities.User;
+import com.jonathanperez.perspective.usermodule.entities.User;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {

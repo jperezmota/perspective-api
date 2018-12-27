@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.entities;
+package com.jonathanperez.perspective.usermodule.entities;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.dto;
+package com.jonathanperez.perspective.usermodule.dtos;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

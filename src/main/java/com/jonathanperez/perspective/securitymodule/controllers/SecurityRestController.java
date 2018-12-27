@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jonathanperez.perspective.dto.UserCreationDTO;
-import com.jonathanperez.perspective.dto.UserDTO;
-import com.jonathanperez.perspective.entities.User;
 import com.jonathanperez.perspective.securitymodule.services.SecurityService;
+import com.jonathanperez.perspective.usermodule.dtos.UserCreationDTO;
+import com.jonathanperez.perspective.usermodule.dtos.UserDTO;
+import com.jonathanperez.perspective.usermodule.entities.User;
 
 @RestController
 @RequestMapping("/api")

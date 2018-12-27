@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.dto;
+package com.jonathanperez.perspective.usermodule.dtos;
 
 import java.util.List;
 

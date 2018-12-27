@@ -1,6 +1,6 @@
-package com.jonathanperez.perspective.repository;
+package com.jonathanperez.perspective.usermodule.repositories;
 
-import com.jonathanperez.perspective.entities.User;
+import com.jonathanperez.perspective.usermodule.entities.User;
 
 public interface UserRepository {
 	

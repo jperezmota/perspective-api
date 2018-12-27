@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.jonathanperez.perspective.dto.UserCreationDTO;
-import com.jonathanperez.perspective.entities.User;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
-import com.jonathanperez.perspective.service.UserService;
+import com.jonathanperez.perspective.usermodule.dtos.UserCreationDTO;
+import com.jonathanperez.perspective.usermodule.entities.User;
+import com.jonathanperez.perspective.usermodule.services.UserService;
 
 @Service
 @Transactional
