@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.service;
+package com.jonathanperez.perspective.securitymodule.services;
 
 import com.jonathanperez.perspective.dto.UserCreationDTO;
 import com.jonathanperez.perspective.entities.User;

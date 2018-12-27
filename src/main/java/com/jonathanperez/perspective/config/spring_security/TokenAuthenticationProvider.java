@@ -18,9 +18,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Component;
 
-import com.jonathanperez.perspective.entities.Authority;
 import com.jonathanperez.perspective.entities.User;
 import com.jonathanperez.perspective.repository.UserRepository;
+import com.jonathanperez.perspective.securitymodule.entities.Authority;
 
 @Component
 public class TokenAuthenticationProvider implements AuthenticationProvider {

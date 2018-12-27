@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.entities;
+package com.jonathanperez.perspective.securitymodule.entities;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.jonathanperez.perspective.entities.User;
 
 @Entity
 @Table(name = "authorities")

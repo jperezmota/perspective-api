@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.controller;
+package com.jonathanperez.perspective.securitymodule.controllers;
 
 import javax.validation.Valid;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jonathanperez.perspective.dto.UserCreationDTO;
 import com.jonathanperez.perspective.dto.UserDTO;
 import com.jonathanperez.perspective.entities.User;
-import com.jonathanperez.perspective.service.SecurityService;
+import com.jonathanperez.perspective.securitymodule.services.SecurityService;
 
 @RestController
 @RequestMapping("/api")

@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.jonathanperez.perspective.config.spring_security.Authorities;
 import com.jonathanperez.perspective.dto.UserCreationDTO;
-import com.jonathanperez.perspective.entities.Authority;
 import com.jonathanperez.perspective.entities.User;
 import com.jonathanperez.perspective.repository.UserRepository;
+import com.jonathanperez.perspective.securitymodule.entities.Authority;
 
 @Service
 @Transactional

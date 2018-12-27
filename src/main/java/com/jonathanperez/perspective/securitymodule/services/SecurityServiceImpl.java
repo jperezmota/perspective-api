@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.service;
+package com.jonathanperez.perspective.securitymodule.services;
 
 import javax.transaction.Transactional;
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.jonathanperez.perspective.dto.UserCreationDTO;
 import com.jonathanperez.perspective.entities.User;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
+import com.jonathanperez.perspective.service.UserService;
 
 @Service
 @Transactional
