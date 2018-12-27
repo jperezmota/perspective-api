@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.exception;
+package com.jonathanperez.perspective.sharedmodule.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
 

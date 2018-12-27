@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.jonathanperez.perspective.categorymodule.entities.Category;
 import com.jonathanperez.perspective.categorymodule.repositories.CategoryRepository;
-import com.jonathanperez.perspective.exception.ResourceNotFoundException;
-import com.jonathanperez.perspective.util.UserSessionUtil;
+import com.jonathanperez.perspective.sharedmodule.exceptions.ResourceNotFoundException;
+import com.jonathanperez.perspective.sharedmodule.session.UserSessionUtil;
 
 @Service
 @Transactional

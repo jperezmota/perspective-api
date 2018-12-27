@@ -13,11 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jonathanperez.perspective.authormodule.services.AuthorService;
 import com.jonathanperez.perspective.categorymodule.services.CategoryService;
-import com.jonathanperez.perspective.exception.ResourceNotFoundException;
 import com.jonathanperez.perspective.perspectivemodule.dtos.PerspectiveDTO;
 import com.jonathanperez.perspective.perspectivemodule.entities.Perspective;
 import com.jonathanperez.perspective.perspectivemodule.repositories.PerspectiveRepository;
-import com.jonathanperez.perspective.util.UserSessionUtil;
+import com.jonathanperez.perspective.sharedmodule.exceptions.ResourceNotFoundException;
+import com.jonathanperez.perspective.sharedmodule.session.UserSessionUtil;
 
 @Service
 @Transactional

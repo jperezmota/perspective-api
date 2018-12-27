@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.jonathanperez.perspective.exception.ResourceNotFoundException;
 import com.jonathanperez.perspective.restmodule.dtos.CustomErrorResponseDTO;
+import com.jonathanperez.perspective.sharedmodule.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
 public class RestExceptionHandlerController {

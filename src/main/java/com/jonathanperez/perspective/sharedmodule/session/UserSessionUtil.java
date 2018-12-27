@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.util;
+package com.jonathanperez.perspective.sharedmodule.session;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
