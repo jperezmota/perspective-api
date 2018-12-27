@@ -43,8 +43,6 @@ public class CategoryServiceImpl implements CategoryService {
 			throw new ValidationException("Category name: " + category.getName() + ", already exists.");
 		}
 		
-		category.setCreatedBy(UserSessionUtil.getUsername());
-		category.setCreatedDate(new Date());
 		categoryRepository.saveCategory(category);
 	}
 
@@ -55,6 +53,7 @@ public class CategoryServiceImpl implements CategoryService {
 			category.setDeleted(true);
 			category.setDeletedBy(UserSessionUtil.getUsername());
 			category.setDeletedDate(new Date());
+			
 			categoryRepository.updateCategory(category);
 	 	}catch(EmptyResultDataAccessException ex) {
 	 		throw new ResourceNotFoundException("Category", "Id", id);
@@ -65,19 +64,17 @@ public class CategoryServiceImpl implements CategoryService {
 	public Category updateCategory(Category category, long id) {
 		try {
 			String username = UserSessionUtil.getUsername();
-			category = categoryRepository.getCategory(id, UserSessionUtil.getUsername());
+			Category existingCategory = categoryRepository.getCategory(id, UserSessionUtil.getUsername());
 			
 			boolean categoryNameAlreadyExists = verifyUserCategoryNameExistance(category.getName(), username, id);
 			if(categoryNameAlreadyExists) {
 				throw new ValidationException("Category name: " + category.getName() + ", already exists.");
 			}
 
-			category.setName(category.getName());
-			category.setLastModifiedBy(username);
-			category.setLastModifiedDate(new Date());
-			categoryRepository.updateCategory(category);
+			existingCategory.setName(category.getName());
+			categoryRepository.updateCategory(existingCategory);
 			
-			return category;
+			return existingCategory;
 		}catch(EmptyResultDataAccessException ex) {
 	 		throw new ResourceNotFoundException("Category", "Id", id);
 	 	}

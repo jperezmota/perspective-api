@@ -10,7 +10,6 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 import com.jonathanperez.perspective.entities.Category;
-import com.jonathanperez.perspective.entities.Perspective;
 
 @Repository
 public class CategoryRepositoryImpl implements CategoryRepository {

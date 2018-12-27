@@ -45,4 +45,23 @@ public class AuthorRepositoryImpl implements AuthorRepository {
 		em.merge(author);
 	}
 
+	@Override
+	public Author findUserAuthorByName(String name, String username) {
+		TypedQuery<Author> query = em.createQuery("from Author a where a.name =:name and a.createdBy =:createdBy and a.isDeleted = false", Author.class);
+		query.setParameter("name", name);
+		query.setParameter("createdBy", username);
+		
+		return query.getSingleResult();
+	}
+
+	@Override
+	public Author findUserAuthorByName(String name, String username, long idToExclude) {
+		TypedQuery<Author> query = em.createQuery("from Author a where a.id !=:id and a.name =:name and a.createdBy =:createdBy and a.isDeleted = false ", Author.class);
+		query.setParameter("id", idToExclude);
+		query.setParameter("name", name);
+		query.setParameter("createdBy", username);
+		
+		return query.getSingleResult();
+	}
+
 }
