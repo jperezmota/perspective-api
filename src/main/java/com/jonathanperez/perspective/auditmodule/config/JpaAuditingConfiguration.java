@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.config.jpa;
+package com.jonathanperez.perspective.auditmodule.config;
 
 import java.util.Optional;
 

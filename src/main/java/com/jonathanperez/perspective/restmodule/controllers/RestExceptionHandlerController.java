@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.controller;
+package com.jonathanperez.perspective.restmodule.controllers;
 
 import javax.validation.ValidationException;
 
@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.jonathanperez.perspective.dto.CustomErrorResponseDTO;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
+import com.jonathanperez.perspective.restmodule.dtos.CustomErrorResponseDTO;
 
 @ControllerAdvice
 public class RestExceptionHandlerController {

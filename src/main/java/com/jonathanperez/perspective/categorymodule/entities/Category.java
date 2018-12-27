@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.jonathanperez.perspective.entities.Auditable;
+import com.jonathanperez.perspective.auditmodule.entities.Auditable;
 
 @Entity
 @Table(name = "categories")

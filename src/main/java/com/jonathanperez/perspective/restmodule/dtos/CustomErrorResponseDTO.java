@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.dto;
+package com.jonathanperez.perspective.restmodule.dtos;
 
 public class CustomErrorResponseDTO {
 	public int status;

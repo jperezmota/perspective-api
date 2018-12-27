@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.entities;
+package com.jonathanperez.perspective.auditmodule.entities;
 
 import java.util.Date;
 
