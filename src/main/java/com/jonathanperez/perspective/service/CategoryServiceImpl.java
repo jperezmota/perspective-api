@@ -4,13 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.jonathanperez.perspective.dto.CategoryDTO;
 import com.jonathanperez.perspective.entities.Category;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
 import com.jonathanperez.perspective.repository.CategoryRepository;
@@ -39,19 +38,22 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public void createCategory(Category category) {
-		category.setCreatedBy("admin");
-		category.setCreatedDate(new Date());
+		boolean categoryNameAlreadyExists = verifyUserCategoryNameExistance(category.getName(), UserSessionUtil.getUsername());
+		if(categoryNameAlreadyExists) {
+			throw new ValidationException("Category name: " + category.getName() + ", already exists.");
+		}
+		
 		categoryRepository.saveCategory(category);
 	}
 
 	@Override
 	public void deleteCategory(long id) {
 		try {
-			
 			Category category = categoryRepository.getCategory(id, UserSessionUtil.getUsername());	
 			category.setDeleted(true);
-			category.setDeletedBy("admin");
+			category.setDeletedBy(UserSessionUtil.getUsername());
 			category.setDeletedDate(new Date());
+			
 			categoryRepository.updateCategory(category);
 	 	}catch(EmptyResultDataAccessException ex) {
 	 		throw new ResourceNotFoundException("Category", "Id", id);
@@ -59,18 +61,44 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category updateCategory(CategoryDTO categoryDTO, long id) {
+	public Category updateCategory(Category category, long id) {
 		try {
-			Category category = categoryRepository.getCategory(id, UserSessionUtil.getUsername());
-			category.setName(categoryDTO.name);
-			category.setLastModifiedBy("admin");
-			category.setLastModifiedDate(new Date());
-			categoryRepository.updateCategory(category);
+			String username = UserSessionUtil.getUsername();
+			Category existingCategory = categoryRepository.getCategory(id, UserSessionUtil.getUsername());
 			
-			return category;
+			boolean categoryNameAlreadyExists = verifyUserCategoryNameExistance(category.getName(), username, id);
+			if(categoryNameAlreadyExists) {
+				throw new ValidationException("Category name: " + category.getName() + ", already exists.");
+			}
+
+			existingCategory.setName(category.getName());
+			categoryRepository.updateCategory(existingCategory);
+			
+			return existingCategory;
 		}catch(EmptyResultDataAccessException ex) {
 	 		throw new ResourceNotFoundException("Category", "Id", id);
 	 	}
+	}
+	
+	@Override
+	public boolean verifyUserCategoryNameExistance(String name, String username) {
+		try{
+			categoryRepository.findUserCategoryByName(name, username);
+			return true;
+		}catch(EmptyResultDataAccessException ex) {
+	 		return false;
+	 	}	
+	}
+	
+	@Override
+	public boolean verifyUserCategoryNameExistance(String name, String username, long idToExclude) {
+		try{
+			categoryRepository.findUserCategoryByName(name, username, idToExclude);
+			return true;
+		}
+		catch(EmptyResultDataAccessException ex) {
+	 		return false;
+	 	}	
 	}
 
 }

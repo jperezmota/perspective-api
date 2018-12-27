@@ -4,12 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.jonathanperez.perspective.dto.AuthorDTO;
 import com.jonathanperez.perspective.entities.Author;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
 import com.jonathanperez.perspective.repository.AuthorRepository;
@@ -38,17 +38,29 @@ public class AuthorServiceImpl implements AuthorService {
 
 	@Override
 	public void createAuthor(Author author) {
+		boolean authorNameAlreadyExists = verifyUserAuthorNameExistance(author.getName(), UserSessionUtil.getUsername());
+		if(authorNameAlreadyExists) {
+			throw new ValidationException("Author name: " + author.getName() + ", already exists.");
+		}
+		
 		authorRepository.saveAuthor(author);
 	}
 
 	@Override
-	public Author updateAuthor(AuthorDTO authorDTO, long id) {
-		try {
-			Author author = authorRepository.getAuthor(id, UserSessionUtil.getUsername());
-			author.setName(authorDTO.name);
-			authorRepository.updateAuthor(author);
+	public Author updateAuthor(Author author, long id) {
+		try {			
+			String username =  UserSessionUtil.getUsername();
+			Author existingAuthor = authorRepository.getAuthor(id, username);
+
+			boolean authorNameAlreadyExists = verifyUserAuthorNameExistance(author.getName(), username, id);
+			if(authorNameAlreadyExists) {
+				throw new ValidationException("Author name: " + author.getName() + ", already exists.");
+			}
 			
-			return author;
+			existingAuthor.setName(author.getName());
+			authorRepository.updateAuthor(existingAuthor);
+			
+			return existingAuthor;
 		}catch(EmptyResultDataAccessException ex) {
 	 		throw new ResourceNotFoundException("Author", "Id", id);
 	 	}
@@ -65,6 +77,27 @@ public class AuthorServiceImpl implements AuthorService {
 	 	}catch(EmptyResultDataAccessException ex) {
 	 		throw new ResourceNotFoundException("Author", "Id", id);
 	 	}
+	}
+
+	@Override
+	public boolean verifyUserAuthorNameExistance(String name, String username) {
+		try{
+			authorRepository.findUserAuthorByName(name, username);
+			return true;
+		}catch(EmptyResultDataAccessException ex) {
+	 		return false;
+	 	}	
+	}
+
+	@Override
+	public boolean verifyUserAuthorNameExistance(String name, String username, long idToExclude) {
+		try{
+			authorRepository.findUserAuthorByName(name, username, idToExclude);
+			return true;
+		}
+		catch(EmptyResultDataAccessException ex) {
+	 		return false;
+	 	}	
 	}
 
 }

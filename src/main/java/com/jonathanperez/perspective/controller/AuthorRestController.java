@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jonathanperez.perspective.dto.AuthorDTO;
 import com.jonathanperez.perspective.entities.Author;
 import com.jonathanperez.perspective.service.AuthorService;
 
@@ -47,8 +46,8 @@ public class AuthorRestController {
 	}
 	
 	@PatchMapping("/authors/{id}")
-	public Author updateAuthor(@Valid @RequestBody AuthorDTO authorDTO, @PathVariable long id) {
-		return authorService.updateAuthor(authorDTO, id);
+	public Author updateAuthor(@Valid @RequestBody Author author, @PathVariable long id) {
+		return authorService.updateAuthor(author, id);
 	}
 	
 	@DeleteMapping("/authors/{id}")

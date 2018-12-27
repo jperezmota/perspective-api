@@ -45,4 +45,23 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 		em.merge(category);
 	}
 
+	@Override
+	public Category findUserCategoryByName(String name, String username) {
+		TypedQuery<Category> query = em.createQuery("from Category c where c.name =:name and c.createdBy =:createdBy and c.isDeleted = false", Category.class);
+		query.setParameter("name", name);
+		query.setParameter("createdBy", username);
+		
+		return query.getSingleResult();
+	}
+
+	@Override
+	public Category findUserCategoryByName(String name, String username, long idToExclude) {
+		TypedQuery<Category> query = em.createQuery("from Category c where c.id !=:id and c.name =:name and c.createdBy =:createdBy and c.isDeleted = false ", Category.class);
+		query.setParameter("id", idToExclude);
+		query.setParameter("name", name);
+		query.setParameter("createdBy", username);
+		
+		return query.getSingleResult();
+	}
+
 }

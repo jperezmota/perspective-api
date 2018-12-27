@@ -55,8 +55,6 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 		perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorService.getAuthor(perspectiveDTO.authorId));
 		perspective.setCategory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
 		perspective.setThoughts(perspectiveDTO.thoughts);
-		perspective.setCreatedBy(UserSessionUtil.getUsername());
-		perspective.setCreatedDate(new Date());
 		
 		perspectiveRepository.savePerspective(perspective);
 		
@@ -89,8 +87,6 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 			perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorService.getAuthor(perspectiveDTO.authorId));
 			perspective.setCategory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
 			perspective.setThoughts(perspectiveDTO.thoughts);
-			perspective.setLastModifiedBy(UserSessionUtil.getUsername());
-			perspective.setLastModifiedDate(new Date());
 			
 			perspectiveRepository.updatePerspective(perspective);
 			
