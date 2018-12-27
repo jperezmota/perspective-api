@@ -3,7 +3,7 @@ package com.jonathanperez.perspective.authormodule.repositories;
 import java.util.List;
 
 import com.jonathanperez.perspective.authormodule.entities.Author;
-import com.jonathanperez.perspective.entities.Category;
+import com.jonathanperez.perspective.categorymodule.entities.Category;
 
 public interface AuthorRepository {
 	public List<Author> getAuthors(String username);

@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jonathanperez.perspective.authormodule.services.AuthorService;
+import com.jonathanperez.perspective.categorymodule.services.CategoryService;
 import com.jonathanperez.perspective.dto.PerspectiveDTO;
 import com.jonathanperez.perspective.exception.ResourceNotFoundException;
 import com.jonathanperez.perspective.perspectivemodule.entities.Perspective;
 import com.jonathanperez.perspective.perspectivemodule.repositories.PerspectiveRepository;
-import com.jonathanperez.perspective.service.CategoryService;
 import com.jonathanperez.perspective.util.UserSessionUtil;
 
 @Service

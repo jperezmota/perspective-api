@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.controller;
+package com.jonathanperez.perspective.categorymodule.controllers;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jonathanperez.perspective.entities.Category;
-import com.jonathanperez.perspective.service.CategoryService;
+import com.jonathanperez.perspective.categorymodule.entities.Category;
+import com.jonathanperez.perspective.categorymodule.services.CategoryService;
 
 @RestController
 @RequestMapping("/api")

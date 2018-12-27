@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.entities;
+package com.jonathanperez.perspective.categorymodule.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.jonathanperez.perspective.entities.Auditable;
 
 @Entity
 @Table(name = "categories")

@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.repository;
+package com.jonathanperez.perspective.categorymodule.repositories;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
-import com.jonathanperez.perspective.entities.Category;
+import com.jonathanperez.perspective.categorymodule.entities.Category;
 
 @Repository
 public class CategoryRepositoryImpl implements CategoryRepository {

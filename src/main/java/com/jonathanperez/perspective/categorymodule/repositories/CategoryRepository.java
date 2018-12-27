@@ -1,8 +1,8 @@
-package com.jonathanperez.perspective.repository;
+package com.jonathanperez.perspective.categorymodule.repositories;
 
 import java.util.List;
 
-import com.jonathanperez.perspective.entities.Category;
+import com.jonathanperez.perspective.categorymodule.entities.Category;
 import com.jonathanperez.perspective.perspectivemodule.entities.Perspective;
 
 public interface CategoryRepository {	

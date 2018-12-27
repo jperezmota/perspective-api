@@ -13,8 +13,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jonathanperez.perspective.authormodule.entities.Author;
+import com.jonathanperez.perspective.categorymodule.entities.Category;
 import com.jonathanperez.perspective.entities.Auditable;
-import com.jonathanperez.perspective.entities.Category;
 
 @Entity
 @Table(name = "perspectives")
