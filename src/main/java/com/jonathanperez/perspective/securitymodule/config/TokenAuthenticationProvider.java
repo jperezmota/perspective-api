@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.config.spring_security;
+package com.jonathanperez.perspective.securitymodule.config;
 
 import java.util.ArrayList;
 import java.util.List;

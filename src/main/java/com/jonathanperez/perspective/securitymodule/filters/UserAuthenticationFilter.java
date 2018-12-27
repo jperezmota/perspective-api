@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.filter;
+package com.jonathanperez.perspective.securitymodule.filters;
 
 import java.io.IOException;
 

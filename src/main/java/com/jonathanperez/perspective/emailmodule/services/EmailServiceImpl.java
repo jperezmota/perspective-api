@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.service;
+package com.jonathanperez.perspective.emailmodule.services;
 
 import javax.mail.internet.MimeMessage;
 

@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.jonathanperez.perspective.config.spring_security.Authorities;
 import com.jonathanperez.perspective.securitymodule.entities.Authority;
+import com.jonathanperez.perspective.securitymodule.shared.Authorities;
 import com.jonathanperez.perspective.usermodule.dtos.UserCreationDTO;
 import com.jonathanperez.perspective.usermodule.entities.User;
 import com.jonathanperez.perspective.usermodule.repositories.UserRepository;

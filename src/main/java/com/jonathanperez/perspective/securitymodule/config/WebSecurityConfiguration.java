@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.config.spring_security;
+package com.jonathanperez.perspective.securitymodule.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.jonathanperez.perspective.filter.UserAuthenticationFilter;
+import com.jonathanperez.perspective.securitymodule.filters.UserAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity

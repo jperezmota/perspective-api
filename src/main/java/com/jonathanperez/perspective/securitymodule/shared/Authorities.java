@@ -1,4 +1,4 @@
-package com.jonathanperez.perspective.config.spring_security;
+package com.jonathanperez.perspective.securitymodule.shared;
 
 public interface Authorities {
 	public static final String ADMIN = "ROLE_ADMIN";
