@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.jonathanperez.perspective.perspectivemodule.entities.Perspective;
 
 @Repository
-public class PerspectiveRepositoryImpl implements PerspectiveRepository{
+public class PerspectiveQueryRepositoryImpl implements PerspectiveQueryRepository{
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -34,28 +34,20 @@ public class PerspectiveRepositoryImpl implements PerspectiveRepository{
 	}
 
 	@Override
-	public void savePerspective(Perspective perspective) {
-		em.persist(perspective);
-	}
-
-	@Override
-	public void updatePerspective(Perspective perspective) {
-		em.merge(perspective);
-	}
-
-	@Override
-	public Perspective findPerspectiveByTitle(String title) {
-		TypedQuery<Perspective> query = em.createQuery("from Perspective p where p.title =:title and p.isDeleted = false", Perspective.class);
+	public Perspective findPerspectiveByTitle(String title, String username) {
+		TypedQuery<Perspective> query = em.createQuery("from Perspective p where p.title =:title and p.createdBy =:createdBy and p.isDeleted = false", Perspective.class);
 		query.setParameter("title", title);
+		query.setParameter("createdBy", username);
 		
 		return query.getSingleResult();
 	}
 
 	@Override
-	public Perspective findPerspectiveByTitle(String title, long idToExclude) {
-		TypedQuery<Perspective> query = em.createQuery("from Perspective p where p.id !=:id and p.title =:title and p.isDeleted = false ", Perspective.class);
+	public Perspective findPerspectiveByTitle(String title, String username, long idToExclude) {
+		TypedQuery<Perspective> query = em.createQuery("from Perspective p where p.id !=:id and p.title =:title and p.createdBy =:createdBy and p.isDeleted = false ", Perspective.class);
 		query.setParameter("title", title);
 		query.setParameter("id", idToExclude);
+		query.setParameter("createdBy", username);
 		
 		return query.getSingleResult();
 	}
