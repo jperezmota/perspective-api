@@ -19,14 +19,14 @@ public class PerspectiveQueryServiceImpl implements PerspectiveQueryService{
 	private PerspectiveQueryRepository perspectiveQueryRepository;
 	
 	@Override
-	public List<Perspective> getPerspectives() {
-		return perspectiveQueryRepository.getPerspectives();
+	public List<Perspective> getPerspectives(String username) {
+		return perspectiveQueryRepository.getPerspectives(username);
 	}
 
 	@Override
-	public Perspective getPerspective(long id) {
+	public Perspective getPerspective(long id, String username) {
 		try {
-			return perspectiveQueryRepository.getPerspective(id);
+			return perspectiveQueryRepository.getPerspective(id, username);
 		}catch(EmptyResultDataAccessException ex) {
 			throw new ResourceNotFoundException("Perspective", "Id", id);
 		}	

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.jonathanperez.perspective.authormodule.entities.Author;
 import com.jonathanperez.perspective.authormodule.repositories.AuthorQueryRepository;
 import com.jonathanperez.perspective.sharedmodule.exceptions.ResourceNotFoundException;
-import com.jonathanperez.perspective.sharedmodule.session.UserSessionUtil;
 
 @Service
 @Transactional
@@ -21,17 +20,17 @@ public class AuthorQueryServiceImpl implements AuthorQueryService {
 	private AuthorQueryRepository authorQueryRepository;
 
 	@Override
-	public Author getAuthor(long id) {
+	public Author getAuthor(long id, String username) {
 		try {
-			return authorQueryRepository.getAuthor(id, UserSessionUtil.getUsername());
+			return authorQueryRepository.getAuthor(id, username);
 		}catch(EmptyResultDataAccessException ex) {
 			throw new ResourceNotFoundException("Author", "Id", id);
 		}
 	}
 
 	@Override
-	public List<Author> getAuthors() {
-		return authorQueryRepository.getAuthors(UserSessionUtil.getUsername());
+	public List<Author> getAuthors(String username) {
+		return authorQueryRepository.getAuthors(username);
 	}
 
 	@Override

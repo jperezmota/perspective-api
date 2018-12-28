@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jonathanperez.perspective.categorymodule.entities.Category;
 import com.jonathanperez.perspective.categorymodule.services.CategoryQueryService;
+import com.jonathanperez.perspective.sharedmodule.session.UserSessionUtil;
 
 @RestController
 @RequestMapping("/api")
@@ -22,13 +23,15 @@ public class CategoryQueryRestController {
 	
 	@GetMapping("/categories")
 	public List<Category> getCategories(){
-		List<Category> categories = categoryQueryService.getCategories();
+		String usernameLogged = UserSessionUtil.getUsername();
+		List<Category> categories = categoryQueryService.getCategories(usernameLogged);
 		return categories;
 	}
 	
 	@GetMapping("/categories/{id}")
 	public Category getCategory(@PathVariable long id) {
-		Category category = categoryQueryService.getCategory(id);		
+		String usernameLogged = UserSessionUtil.getUsername();
+		Category category = categoryQueryService.getCategory(id, usernameLogged);		
 		return category;
 	}
 

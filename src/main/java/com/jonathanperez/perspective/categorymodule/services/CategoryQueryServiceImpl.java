@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.jonathanperez.perspective.categorymodule.entities.Category;
 import com.jonathanperez.perspective.categorymodule.repositories.CategoryQueryRepository;
 import com.jonathanperez.perspective.sharedmodule.exceptions.ResourceNotFoundException;
-import com.jonathanperez.perspective.sharedmodule.session.UserSessionUtil;
 
 @Service
 @Transactional
@@ -21,17 +20,17 @@ public class CategoryQueryServiceImpl implements CategoryQueryService {
 	private CategoryQueryRepository categoryQueryRepository;
 
 	@Override
-	public Category getCategory(long id) {
+	public Category getCategory(long id, String username) {
 		try {
-			return categoryQueryRepository.getCategory(id, UserSessionUtil.getUsername());
+			return categoryQueryRepository.getCategory(id, username);
 		}catch(EmptyResultDataAccessException ex) {
 			throw new ResourceNotFoundException("Category", "Id", id);
 		}	
 	}
 
 	@Override
-	public List<Category> getCategories() {
-		return categoryQueryRepository.getCategories(UserSessionUtil.getUsername());
+	public List<Category> getCategories(String username) {
+		return categoryQueryRepository.getCategories(username);
 	}
 	
 	@Override
