@@ -7,13 +7,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.jonathanperez.perspective.sharedmodule.exceptions.ResourceNotFoundException;
-import com.jonathanperez.perspective.usermodule.dtos.UserCreationDTO;
 import com.jonathanperez.perspective.usermodule.entities.User;
 import com.jonathanperez.perspective.usermodule.services.UserService;
 
 @Service
 @Transactional
-public class SecurityServiceImpl implements SecurityService {
+public class SecurityCommandServiceImpl implements SecurityCommandService {
 
 	@Autowired
 	private UserService userService;
@@ -38,11 +37,6 @@ public class SecurityServiceImpl implements SecurityService {
 		
 		return user;
 	
-	}
-
-	@Override
-	public User createUser(UserCreationDTO userCreationDTO) {
-		return null;
 	}
 
 }

@@ -9,18 +9,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jonathanperez.perspective.securitymodule.services.SecurityService;
-import com.jonathanperez.perspective.usermodule.dtos.UserCreationDTO;
+import com.jonathanperez.perspective.securitymodule.services.SecurityCommandService;
 import com.jonathanperez.perspective.usermodule.dtos.UserDTO;
 import com.jonathanperez.perspective.usermodule.entities.User;
 
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
-public class SecurityRestController {
+public class SecurityCommandRestController {
 	
 	@Autowired
-	private SecurityService securityService;
+	private SecurityCommandService securityService;
 	
 	@PostMapping("/securities")
 	public User authenticateUser(@Valid @RequestBody UserDTO userDTO) {
