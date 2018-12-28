@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.jonathanperez.perspective.categorymodule.entities.Category;
 
 @Repository
-public class CategoryRepositoryImpl implements CategoryRepository {
+public class CategoryQueryRepositoryImpl implements CategoryQueryRepository {
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -33,16 +33,6 @@ public class CategoryRepositoryImpl implements CategoryRepository {
  		List<Category> categories = query.getResultList();
  		
 		return categories;
-	}
-
-	@Override
-	public void saveCategory(Category category) {
-		em.persist(category);
-	}
-
-	@Override
-	public void updateCategory(Category category) {
-		em.merge(category);
 	}
 
 	@Override

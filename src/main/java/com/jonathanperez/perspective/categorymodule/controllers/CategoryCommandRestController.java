@@ -1,13 +1,10 @@
 package com.jonathanperez.perspective.categorymodule.controllers;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,27 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jonathanperez.perspective.categorymodule.entities.Category;
-import com.jonathanperez.perspective.categorymodule.services.CategoryService;
+import com.jonathanperez.perspective.categorymodule.services.CategoryCommandService;
 
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
-public class CategoryRestController {
+public class CategoryCommandRestController {
 	
 	@Autowired
-	private CategoryService categoryService;
-	
-	@GetMapping("/categories")
-	public List<Category> getCategories(){
-		List<Category> categories = categoryService.getCategories();
-		return categories;
-	}
-	
-	@GetMapping("/categories/{id}")
-	public Category getCategory(@PathVariable long id) {
-		Category category = categoryService.getCategory(id);		
-		return category;
-	}
+	private CategoryCommandService categoryService;
 	
 	@PostMapping("/categories")
 	public Category createCategory(@RequestBody Category category) {

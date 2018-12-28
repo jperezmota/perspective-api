@@ -6,7 +6,6 @@ import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.jonathanperez.perspective.authormodule.entities.Author;
@@ -48,8 +47,8 @@ public class AuthorCommandServiceImpl implements AuthorCommandService {
 			authorRepository.updateAuthor(existingAuthor);
 			
 			return existingAuthor;
-		}catch(EmptyResultDataAccessException ex) {
-	 		throw new ResourceNotFoundException("Author", "Id", id);
+		}catch(ResourceNotFoundException ex) {
+	 		throw ex;
 	 	}
 	}
 
@@ -61,8 +60,8 @@ public class AuthorCommandServiceImpl implements AuthorCommandService {
 			author.setDeletedBy("admin");
 			author.setDeletedDate(new Date());
 			authorRepository.updateAuthor(author);
-	 	}catch(EmptyResultDataAccessException ex) {
-	 		throw new ResourceNotFoundException("Author", "Id", id);
+	 	}catch(ResourceNotFoundException ex) {
+	 		throw ex;
 	 	}
 	}
 

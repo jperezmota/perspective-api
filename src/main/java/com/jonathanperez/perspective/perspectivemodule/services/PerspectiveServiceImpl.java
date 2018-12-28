@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jonathanperez.perspective.authormodule.services.AuthorQueryService;
-import com.jonathanperez.perspective.categorymodule.services.CategoryService;
+import com.jonathanperez.perspective.categorymodule.services.CategoryQueryService;
 import com.jonathanperez.perspective.perspectivemodule.dtos.PerspectiveDTO;
 import com.jonathanperez.perspective.perspectivemodule.entities.Perspective;
 import com.jonathanperez.perspective.perspectivemodule.repositories.PerspectiveRepository;
@@ -27,7 +27,7 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 	@Autowired
 	private AuthorQueryService authorQueryService;
 	@Autowired
-	private CategoryService categoryService;
+	private CategoryQueryService categoryQueryService;
 	
 	@Override
 	public List<Perspective> getPerspectives() {
@@ -54,7 +54,7 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 		perspective.setTitle(perspectiveDTO.title);
 		perspective.setPerspective(perspectiveDTO.perspective);
 		perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorQueryService.getAuthor(perspectiveDTO.authorId));
-		perspective.setCategory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
+		perspective.setCategory(perspectiveDTO.categoryId == 0 ? null : categoryQueryService.getCategory(perspectiveDTO.categoryId));
 		perspective.setThoughts(perspectiveDTO.thoughts);
 		
 		perspectiveRepository.savePerspective(perspective);
@@ -86,7 +86,7 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 			Perspective perspective = perspectiveRepository.getPerspective(id);
 			perspective.setPerspective(perspectiveDTO.perspective);
 			perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorQueryService.getAuthor(perspectiveDTO.authorId));
-			perspective.setCategory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
+			perspective.setCategory(perspectiveDTO.categoryId == 0 ? null : categoryQueryService.getCategory(perspectiveDTO.categoryId));
 			perspective.setThoughts(perspectiveDTO.thoughts);
 			
 			perspectiveRepository.updatePerspective(perspective);
