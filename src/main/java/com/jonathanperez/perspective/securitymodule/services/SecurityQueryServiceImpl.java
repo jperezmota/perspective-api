@@ -8,19 +8,19 @@ import org.springframework.stereotype.Service;
 
 import com.jonathanperez.perspective.sharedmodule.exceptions.ResourceNotFoundException;
 import com.jonathanperez.perspective.usermodule.entities.User;
-import com.jonathanperez.perspective.usermodule.services.UserService;
+import com.jonathanperez.perspective.usermodule.services.UserQueryService;
 
 @Service
 @Transactional
-public class SecurityCommandServiceImpl implements SecurityCommandService {
+public class SecurityQueryServiceImpl implements SecurityQueryService {
 
 	@Autowired
-	private UserService userService;
+	private UserQueryService userQueryService;
 	
 	@Override
 	public User authenticateUser(String username, String password) {
 		
-		User user = userService.findUserByUsername(username);
+		User user = userQueryService.findUserByUsername(username);
 		boolean userNotFound = user == null;
 		if(userNotFound) {
 			throw new ResourceNotFoundException("User", "those credential", "");

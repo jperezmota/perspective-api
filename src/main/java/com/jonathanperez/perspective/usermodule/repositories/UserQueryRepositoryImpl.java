@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.jonathanperez.perspective.usermodule.entities.User;
 
 @Repository
-public class UserRepositoryImpl implements UserRepository {
+public class UserQueryRepositoryImpl implements UserQueryRepository {
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -24,16 +24,6 @@ public class UserRepositoryImpl implements UserRepository {
 		TypedQuery<User> typedQuery = em.createQuery("from User u where u.token = :token", User.class);
 		typedQuery.setParameter("token", token);
 		return typedQuery.getSingleResult();
-	}
-
-	@Override
-	public void saveUser(User user) {
-		em.persist(user);
-	}
-	
-	@Override
-	public void updateUser(User user) {
-		em.merge(user);
 	}
 
 	@Override

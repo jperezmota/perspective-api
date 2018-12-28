@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jonathanperez.perspective.securitymodule.services.SecurityCommandService;
+import com.jonathanperez.perspective.securitymodule.services.SecurityQueryService;
 import com.jonathanperez.perspective.usermodule.dtos.UserDTO;
 import com.jonathanperez.perspective.usermodule.entities.User;
 
@@ -19,7 +19,7 @@ import com.jonathanperez.perspective.usermodule.entities.User;
 public class SecurityCommandRestController {
 	
 	@Autowired
-	private SecurityCommandService securityService;
+	private SecurityQueryService securityService;
 	
 	@PostMapping("/securities")
 	public User authenticateUser(@Valid @RequestBody UserDTO userDTO) {

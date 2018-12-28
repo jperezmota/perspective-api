@@ -3,7 +3,6 @@ package com.jonathanperez.perspective.securitymodule.config;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -20,13 +19,13 @@ import org.springframework.stereotype.Component;
 
 import com.jonathanperez.perspective.securitymodule.entities.Authority;
 import com.jonathanperez.perspective.usermodule.entities.User;
-import com.jonathanperez.perspective.usermodule.repositories.UserRepository;
+import com.jonathanperez.perspective.usermodule.repositories.UserQueryRepository;
 
 @Component
 public class TokenAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserQueryRepository userQueryRepository;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -37,7 +36,7 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
         		}
         		
         		String userToken = authentication.getPrincipal().toString();
-        		User user = userRepository.findUserByToken(userToken);
+        		User user = userQueryRepository.findUserByToken(userToken);
         		validateUser(user);
         		List<GrantedAuthority> grantedAuthorities = createGrantedAuthorities(user);
             

@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jonathanperez.perspective.usermodule.dtos.UserCreationDTO;
 import com.jonathanperez.perspective.usermodule.entities.User;
-import com.jonathanperez.perspective.usermodule.services.UserService;
+import com.jonathanperez.perspective.usermodule.services.UserCommandService;
 
 @RestController
 @RequestMapping("api")
 @CrossOrigin
-public class UserRestController {
+public class UserCommandRestController {
 
 	@Autowired
-	private UserService userService;
+	private UserCommandService userService;
 	
 	@PostMapping("/users")
 	public User createUser(@Valid @RequestBody UserCreationDTO userCreationDTO) {

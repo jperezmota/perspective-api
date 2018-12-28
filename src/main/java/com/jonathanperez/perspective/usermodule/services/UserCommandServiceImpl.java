@@ -2,7 +2,6 @@ package com.jonathanperez.perspective.usermodule.services;
 
 import java.util.Date;
 
-import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +12,16 @@ import com.jonathanperez.perspective.securitymodule.entities.Authority;
 import com.jonathanperez.perspective.securitymodule.shared.Authorities;
 import com.jonathanperez.perspective.usermodule.dtos.UserCreationDTO;
 import com.jonathanperez.perspective.usermodule.entities.User;
-import com.jonathanperez.perspective.usermodule.repositories.UserRepository;
+import com.jonathanperez.perspective.usermodule.repositories.UserCommandRepository;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserCommandServiceImpl implements UserCommandService {
 	
 	@Autowired
-	private UserRepository userRepository;
-
-	@Override
-	public User findUserByUsername(String username) {
-		return userRepository.findUserByUsername(username);
-	}
+	private UserCommandRepository userCommandRepository;
+	@Autowired
+	private UserQueryService userQueryService;
 
 	@Override
 	public User createUser(UserCreationDTO userCreationDTO) {
@@ -39,12 +35,12 @@ public class UserServiceImpl implements UserService {
 	private void validateUserData(UserCreationDTO userCreationDTO) {
 		String validationMessage = "";
 		
-		boolean userAlreadyExists = findUserByUsername(userCreationDTO.username) != null;
+		boolean userAlreadyExists = userQueryService.findUserByUsername(userCreationDTO.username) != null;
 		if(userAlreadyExists) {
 			validationMessage += "Username already in use.";
 		}
 		
-		boolean emailAlreadyExists = verifyUserEmailExistance(userCreationDTO.email);
+		boolean emailAlreadyExists = userQueryService.verifyUserEmailExistance(userCreationDTO.email);
 		if(emailAlreadyExists) {
 			validationMessage += "Email already in use.";
 		}
@@ -80,21 +76,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	private void saveUser(User user) {
-		userRepository.saveUser(user);
-	}
-
-	@Override
-	public boolean verifyUserEmailExistance(String email) {
-		boolean userExistance;
-		
-		try {
-			User user = userRepository.findUserByEmail(email);
-			userExistance = true;
-		}catch (Exception ex) {
-			userExistance = false;
-		}
-		
-		return false;
+		userCommandRepository.saveUser(user);
 	}
 
 }
