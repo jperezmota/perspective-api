@@ -1,7 +1,6 @@
 package com.jonathanperez.perspective.authormodule.services;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.transaction.Transactional;
 import javax.validation.ValidationException;
@@ -11,34 +10,22 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.jonathanperez.perspective.authormodule.entities.Author;
-import com.jonathanperez.perspective.authormodule.repositories.AuthorRepository;
+import com.jonathanperez.perspective.authormodule.repositories.AuthorCommandRepository;
 import com.jonathanperez.perspective.sharedmodule.exceptions.ResourceNotFoundException;
 import com.jonathanperez.perspective.sharedmodule.session.UserSessionUtil;
 
 @Service
 @Transactional
-public class AuthorServiceImpl implements AuthorService {
+public class AuthorCommandServiceImpl implements AuthorCommandService {
 	
 	@Autowired
-	private AuthorRepository authorRepository;
-
-	@Override
-	public Author getAuthor(long id) {
-		try {
-			return authorRepository.getAuthor(id, UserSessionUtil.getUsername());
-		}catch(EmptyResultDataAccessException ex) {
-			throw new ResourceNotFoundException("Author", "Id", id);
-		}
-	}
-
-	@Override
-	public List<Author> getAuthors() {
-		return authorRepository.getAuthors(UserSessionUtil.getUsername());
-	}
+	private AuthorCommandRepository authorRepository;
+	@Autowired
+	private AuthorQueryService authorQueryService;
 
 	@Override
 	public void createAuthor(Author author) {
-		boolean authorNameAlreadyExists = verifyUserAuthorNameExistance(author.getName(), UserSessionUtil.getUsername());
+		boolean authorNameAlreadyExists = authorQueryService.verifyUserAuthorNameExistance(author.getName(), UserSessionUtil.getUsername());
 		if(authorNameAlreadyExists) {
 			throw new ValidationException("Author name: " + author.getName() + ", already exists.");
 		}
@@ -50,9 +37,9 @@ public class AuthorServiceImpl implements AuthorService {
 	public Author updateAuthor(Author author, long id) {
 		try {			
 			String username =  UserSessionUtil.getUsername();
-			Author existingAuthor = authorRepository.getAuthor(id, username);
+			Author existingAuthor = authorQueryService.getAuthor(id);
 
-			boolean authorNameAlreadyExists = verifyUserAuthorNameExistance(author.getName(), username, id);
+			boolean authorNameAlreadyExists = authorQueryService.verifyUserAuthorNameExistance(author.getName(), username, id);
 			if(authorNameAlreadyExists) {
 				throw new ValidationException("Author name: " + author.getName() + ", already exists.");
 			}
@@ -69,7 +56,7 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public void deleteAuthor(long id) {
 		try {
-			Author author = authorRepository.getAuthor(id, UserSessionUtil.getUsername());	
+			Author author = authorQueryService.getAuthor(id);	
 			author.setDeleted(true);
 			author.setDeletedBy("admin");
 			author.setDeletedDate(new Date());
@@ -77,27 +64,6 @@ public class AuthorServiceImpl implements AuthorService {
 	 	}catch(EmptyResultDataAccessException ex) {
 	 		throw new ResourceNotFoundException("Author", "Id", id);
 	 	}
-	}
-
-	@Override
-	public boolean verifyUserAuthorNameExistance(String name, String username) {
-		try{
-			authorRepository.findUserAuthorByName(name, username);
-			return true;
-		}catch(EmptyResultDataAccessException ex) {
-	 		return false;
-	 	}	
-	}
-
-	@Override
-	public boolean verifyUserAuthorNameExistance(String name, String username, long idToExclude) {
-		try{
-			authorRepository.findUserAuthorByName(name, username, idToExclude);
-			return true;
-		}
-		catch(EmptyResultDataAccessException ex) {
-	 		return false;
-	 	}	
 	}
 
 }

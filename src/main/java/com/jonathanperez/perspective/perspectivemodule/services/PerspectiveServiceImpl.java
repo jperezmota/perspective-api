@@ -3,7 +3,6 @@ package com.jonathanperez.perspective.perspectivemodule.services;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.NoResultException;
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jonathanperez.perspective.authormodule.services.AuthorService;
+import com.jonathanperez.perspective.authormodule.services.AuthorQueryService;
 import com.jonathanperez.perspective.categorymodule.services.CategoryService;
 import com.jonathanperez.perspective.perspectivemodule.dtos.PerspectiveDTO;
 import com.jonathanperez.perspective.perspectivemodule.entities.Perspective;
@@ -26,7 +25,7 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 	@Autowired
 	private PerspectiveRepository perspectiveRepository;
 	@Autowired
-	private AuthorService authorService;
+	private AuthorQueryService authorQueryService;
 	@Autowired
 	private CategoryService categoryService;
 	
@@ -54,7 +53,7 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 		Perspective perspective = new Perspective();
 		perspective.setTitle(perspectiveDTO.title);
 		perspective.setPerspective(perspectiveDTO.perspective);
-		perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorService.getAuthor(perspectiveDTO.authorId));
+		perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorQueryService.getAuthor(perspectiveDTO.authorId));
 		perspective.setCategory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
 		perspective.setThoughts(perspectiveDTO.thoughts);
 		
@@ -86,7 +85,7 @@ public class PerspectiveServiceImpl implements PerspectiveService{
 			
 			Perspective perspective = perspectiveRepository.getPerspective(id);
 			perspective.setPerspective(perspectiveDTO.perspective);
-			perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorService.getAuthor(perspectiveDTO.authorId));
+			perspective.setAuthor(perspectiveDTO.authorId == 0 ? null : authorQueryService.getAuthor(perspectiveDTO.authorId));
 			perspective.setCategory(perspectiveDTO.categoryId == 0 ? null : categoryService.getCategory(perspectiveDTO.categoryId));
 			perspective.setThoughts(perspectiveDTO.thoughts);
 			

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.jonathanperez.perspective.authormodule.entities.Author;
 
 @Repository
-public class AuthorRepositoryImpl implements AuthorRepository {
+public class AuthorQueryRepositoryImpl implements AuthorQueryRepository {
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -33,16 +33,6 @@ public class AuthorRepositoryImpl implements AuthorRepository {
  		List<Author> authors = query.getResultList();
  		
 		return authors;
-	}
-
-	@Override
-	public void saveAuthor(Author author) {
-		em.persist(author);		
-	}
-
-	@Override
-	public void updateAuthor(Author author) {
-		em.merge(author);
 	}
 
 	@Override
