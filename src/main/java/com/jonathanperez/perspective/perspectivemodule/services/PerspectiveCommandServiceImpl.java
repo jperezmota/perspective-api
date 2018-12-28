@@ -50,7 +50,7 @@ public class PerspectiveCommandServiceImpl implements PerspectiveCommandService 
 
 	@Override
 	public void deletePerspective(long id, String username) {
-		Perspective perspective = perspectiveQueryService.getPerspective(id);
+		Perspective perspective = perspectiveQueryService.getPerspective(id, username);
 		perspective.setDeleted(true);
 		perspective.setDeletedBy(username);
 		perspective.setDeletedDate(new Date());
@@ -65,7 +65,7 @@ public class PerspectiveCommandServiceImpl implements PerspectiveCommandService 
 			throw new ValidationException("Perspective title: " + perspectiveDTO.title + ", already exists.");
 		}
 
-		Perspective perspective = perspectiveQueryService.getPerspective(id);
+		Perspective perspective = perspectiveQueryService.getPerspective(id, username);
 		perspective.setTitle(perspectiveDTO.title);
 		perspective.setPerspective(perspectiveDTO.perspective);
 		perspective

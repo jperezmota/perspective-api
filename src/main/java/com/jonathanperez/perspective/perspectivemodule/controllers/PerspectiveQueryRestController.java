@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jonathanperez.perspective.perspectivemodule.entities.Perspective;
 import com.jonathanperez.perspective.perspectivemodule.services.PerspectiveQueryService;
+import com.jonathanperez.perspective.sharedmodule.session.UserSessionUtil;
 
 @RestController
 @RequestMapping("/api")
@@ -22,13 +23,15 @@ public class PerspectiveQueryRestController {
 	
 	@GetMapping("/perspectives")
 	public List<Perspective> getPerspectives(){
-		List<Perspective> perspectives = perspectiveQueryService.getPerspectives();
+		String usernameLogged = UserSessionUtil.getUsername();
+		List<Perspective> perspectives = perspectiveQueryService.getPerspectives(usernameLogged);
 		return perspectives;	
 	}
 	
 	@GetMapping("/perspectives/{id}")
 	public Perspective getPerspective(@PathVariable long id) {	
-		Perspective perspective = perspectiveQueryService.getPerspective(id);
+		String usernameLogged = UserSessionUtil.getUsername();
+		Perspective perspective = perspectiveQueryService.getPerspective(id, usernameLogged);
 		return perspective;	
 	}
 
