@@ -13,7 +13,6 @@ import com.jonathanperez.perspective.categorymodule.services.CategoryQueryServic
 import com.jonathanperez.perspective.perspectivemodule.dtos.PerspectiveDTO;
 import com.jonathanperez.perspective.perspectivemodule.entities.Perspective;
 import com.jonathanperez.perspective.perspectivemodule.repositories.PerspectiveCommandRepository;
-import com.jonathanperez.perspective.sharedmodule.session.UserSessionUtil;
 
 @Service
 @Transactional
@@ -39,9 +38,9 @@ public class PerspectiveCommandServiceImpl implements PerspectiveCommandService 
 		perspective.setTitle(perspectiveDTO.title);
 		perspective.setPerspective(perspectiveDTO.perspective);
 		perspective
-				.setAuthor(perspectiveDTO.authorId == 0 ? null : authorQueryService.getAuthor(perspectiveDTO.authorId));
+				.setAuthor(perspectiveDTO.authorId == 0 ? null : authorQueryService.getAuthor(perspectiveDTO.authorId, username));
 		perspective.setCategory(
-				perspectiveDTO.categoryId == 0 ? null : categoryQueryService.getCategory(perspectiveDTO.categoryId));
+				perspectiveDTO.categoryId == 0 ? null : categoryQueryService.getCategory(perspectiveDTO.categoryId, username));
 		perspective.setThoughts(perspectiveDTO.thoughts);
 
 		perspectiveCommandRepository.savePerspective(perspective);
@@ -70,9 +69,9 @@ public class PerspectiveCommandServiceImpl implements PerspectiveCommandService 
 		perspective.setTitle(perspectiveDTO.title);
 		perspective.setPerspective(perspectiveDTO.perspective);
 		perspective
-				.setAuthor(perspectiveDTO.authorId == 0 ? null : authorQueryService.getAuthor(perspectiveDTO.authorId));
+				.setAuthor(perspectiveDTO.authorId == 0 ? null : authorQueryService.getAuthor(perspectiveDTO.authorId, username));
 		perspective.setCategory(
-				perspectiveDTO.categoryId == 0 ? null : categoryQueryService.getCategory(perspectiveDTO.categoryId));
+				perspectiveDTO.categoryId == 0 ? null : categoryQueryService.getCategory(perspectiveDTO.categoryId, username));
 		perspective.setThoughts(perspectiveDTO.thoughts);
 
 		perspectiveCommandRepository.updatePerspective(perspective);

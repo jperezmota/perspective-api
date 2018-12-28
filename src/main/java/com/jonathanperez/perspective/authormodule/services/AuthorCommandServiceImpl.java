@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.jonathanperez.perspective.authormodule.entities.Author;
 import com.jonathanperez.perspective.authormodule.repositories.AuthorCommandRepository;
-import com.jonathanperez.perspective.sharedmodule.session.UserSessionUtil;
 
 @Service
 @Transactional
@@ -22,9 +21,9 @@ public class AuthorCommandServiceImpl implements AuthorCommandService {
 	private AuthorQueryService authorQueryService;
 
 	@Override
-	public void createAuthor(Author author) {
+	public void createAuthor(Author author, String username) {
 		boolean authorNameAlreadyExists = authorQueryService.verifyUserAuthorNameExistance(author.getName(),
-				UserSessionUtil.getUsername());
+				username);
 		if (authorNameAlreadyExists) {
 			throw new ValidationException("Author name: " + author.getName() + ", already exists.");
 		}
@@ -33,9 +32,8 @@ public class AuthorCommandServiceImpl implements AuthorCommandService {
 	}
 
 	@Override
-	public Author updateAuthor(Author author, long id) {
-		String username = UserSessionUtil.getUsername();
-		Author existingAuthor = authorQueryService.getAuthor(id);
+	public Author updateAuthor(Author author, long id, String username) {
+		Author existingAuthor = authorQueryService.getAuthor(id, username);
 
 		boolean authorNameAlreadyExists = authorQueryService.verifyUserAuthorNameExistance(author.getName(), username,
 				id);
@@ -50,10 +48,10 @@ public class AuthorCommandServiceImpl implements AuthorCommandService {
 	}
 
 	@Override
-	public void deleteAuthor(long id) {
-		Author author = authorQueryService.getAuthor(id);
+	public void deleteAuthor(long id, String username) {
+		Author author = authorQueryService.getAuthor(id, username);
 		author.setDeleted(true);
-		author.setDeletedBy("admin");
+		author.setDeletedBy(username);
 		author.setDeletedDate(new Date());
 		authorRepository.updateAuthor(author);
 	}

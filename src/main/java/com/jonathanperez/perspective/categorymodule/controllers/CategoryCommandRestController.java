@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jonathanperez.perspective.categorymodule.entities.Category;
 import com.jonathanperez.perspective.categorymodule.services.CategoryCommandService;
+import com.jonathanperez.perspective.sharedmodule.session.UserSessionUtil;
 
 @RestController
 @RequestMapping("/api")
@@ -25,18 +26,21 @@ public class CategoryCommandRestController {
 	
 	@PostMapping("/categories")
 	public Category createCategory(@RequestBody Category category) {
-		categoryService.createCategory(category);
+		String usernameLogged = UserSessionUtil.getUsername();
+		categoryService.createCategory(category, usernameLogged);
 		return category;
 	}
 	
 	@PatchMapping("/categories/{id}")
 	public Category updateCategory(@Valid @RequestBody Category category, @PathVariable long id) {
-		return categoryService.updateCategory(category, id);
+		String usernameLogged = UserSessionUtil.getUsername();
+		return categoryService.updateCategory(category, id, usernameLogged);
 	}
 	
 	@DeleteMapping("/categories/{id}")
 	public void deleteCategory(@PathVariable long id) {
-		categoryService.deleteCategory(id);
+		String usernameLogged = UserSessionUtil.getUsername();
+		categoryService.deleteCategory(id, usernameLogged);
 	}
 
 }

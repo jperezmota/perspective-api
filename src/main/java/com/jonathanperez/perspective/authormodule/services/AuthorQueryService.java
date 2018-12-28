@@ -5,8 +5,8 @@ import java.util.List;
 import com.jonathanperez.perspective.authormodule.entities.Author;
 
 public interface AuthorQueryService {
-	public List<Author> getAuthors();
-	public Author getAuthor(long id);
+	public List<Author> getAuthors(String username);
+	public Author getAuthor(long id, String username);
 	public boolean verifyUserAuthorNameExistance(String name, String username);
 	public boolean verifyUserAuthorNameExistance(String name, String username, long idToExclude);
 }

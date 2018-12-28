@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.jonathanperez.perspective.categorymodule.entities.Category;
 import com.jonathanperez.perspective.categorymodule.repositories.CategoryCommandRepository;
-import com.jonathanperez.perspective.sharedmodule.session.UserSessionUtil;
 
 @Service
 @Transactional
@@ -22,9 +21,9 @@ public class CategoryCommandServiceImpl implements CategoryCommandService {
 	private CategoryQueryService categoryQueryService;
 
 	@Override
-	public void createCategory(Category category) {
+	public void createCategory(Category category, String username) {
 		boolean categoryNameAlreadyExists = categoryQueryService.verifyUserCategoryNameExistance(category.getName(),
-				UserSessionUtil.getUsername());
+				 username);
 		if (categoryNameAlreadyExists) {
 			throw new ValidationException("Category name: " + category.getName() + ", already exists.");
 		}
@@ -33,11 +32,11 @@ public class CategoryCommandServiceImpl implements CategoryCommandService {
 	}
 
 	@Override
-	public void deleteCategory(long id) {
+	public void deleteCategory(long id, String username) {
 
-		Category category = categoryQueryService.getCategory(id);
+		Category category = categoryQueryService.getCategory(id, username);
 		category.setDeleted(true);
-		category.setDeletedBy(UserSessionUtil.getUsername());
+		category.setDeletedBy(username);
 		category.setDeletedDate(new Date());
 
 		categoryCommandRepository.updateCategory(category);
@@ -45,9 +44,8 @@ public class CategoryCommandServiceImpl implements CategoryCommandService {
 	}
 
 	@Override
-	public Category updateCategory(Category category, long id) {
-		String username = UserSessionUtil.getUsername();
-		Category existingCategory = categoryQueryService.getCategory(id);
+	public Category updateCategory(Category category, long id, String username) {
+		Category existingCategory = categoryQueryService.getCategory(id, username);
 
 		boolean categoryNameAlreadyExists = categoryQueryService.verifyUserCategoryNameExistance(category.getName(),
 				username, id);

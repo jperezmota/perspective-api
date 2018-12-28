@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jonathanperez.perspective.authormodule.entities.Author;
 import com.jonathanperez.perspective.authormodule.services.AuthorQueryService;
+import com.jonathanperez.perspective.sharedmodule.session.UserSessionUtil;
 
 
 @RestController
@@ -23,13 +24,15 @@ public class AuthorQueryRestController {
 	
 	@GetMapping("/authors")
 	public List<Author> getAuthors(){
-		List<Author> authors = authorQueryService.getAuthors();
+		String usernameLogged = UserSessionUtil.getUsername();
+		List<Author> authors = authorQueryService.getAuthors(usernameLogged);
 		return authors;
 	}
 	
 	@GetMapping("/authors/{id}")
 	public Author getAuthor(@PathVariable long id) {
-		Author author = authorQueryService.getAuthor(id);		
+		String usernameLogged = UserSessionUtil.getUsername();
+		Author author = authorQueryService.getAuthor(id, usernameLogged);		
 		return author;
 	}
 

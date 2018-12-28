@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jonathanperez.perspective.authormodule.entities.Author;
 import com.jonathanperez.perspective.authormodule.services.AuthorCommandService;
+import com.jonathanperez.perspective.sharedmodule.session.UserSessionUtil;
 
 
 @RestController
@@ -26,18 +27,21 @@ public class AuthorCommandRestController {
 	
 	@PostMapping("/authors")
 	public Author createAuthor(@RequestBody Author author) {
-		authorCommandService.createAuthor(author);
+		String usernameLogged = UserSessionUtil.getUsername();
+		authorCommandService.createAuthor(author, usernameLogged);
 		return author;
 	}
 	
 	@PatchMapping("/authors/{id}")
 	public Author updateAuthor(@Valid @RequestBody Author author, @PathVariable long id) {
-		return authorCommandService.updateAuthor(author, id);
+		String usernameLogged = UserSessionUtil.getUsername();
+		return authorCommandService.updateAuthor(author, id, usernameLogged);
 	}
 	
 	@DeleteMapping("/authors/{id}")
 	public void deleteAuthor(@PathVariable long id) {
-		authorCommandService.deleteAuthor(id);
+		String usernameLogged = UserSessionUtil.getUsername();
+		authorCommandService.deleteAuthor(id, usernameLogged);
 	}
 
 }
