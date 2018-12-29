@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jonathanperez.perspective.authormodule.entities.Author;
@@ -23,9 +24,9 @@ public class AuthorQueryRestController {
 	private AuthorQueryService authorQueryService;
 	
 	@GetMapping("/authors")
-	public List<Author> getAuthors(){
+	public List<Author> getAuthors(@RequestParam(required = false) String searchTerm){
 		String usernameLogged = UserSessionUtil.getUsername();
-		List<Author> authors = authorQueryService.getAuthors(usernameLogged);
+		List<Author> authors = authorQueryService.getAuthors(usernameLogged, searchTerm);
 		return authors;
 	}
 	

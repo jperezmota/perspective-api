@@ -18,8 +18,15 @@ public class PerspectiveQueryRepositoryImpl implements PerspectiveQueryRepositor
 	private EntityManager em;
 
  	@Override
-	public List<Perspective> getPerspectives(String username) {
- 		Query query = em.createQuery("from Perspective p where p.createdBy =:createdBy and p.isDeleted = false", Perspective.class);
+	public List<Perspective> getPerspectives(String username, String searchTerm) {
+ 		String queryString = "from Perspective p where p.createdBy =:createdBy and p.isDeleted = false";
+ 		
+ 		boolean searchTermIsPresent = searchTerm != null;
+ 		if(searchTermIsPresent) {
+ 			queryString += " and concat(p.id, p.title) like '%" + searchTerm + "%'";	
+ 		}
+ 		
+ 		Query query = em.createQuery(queryString, Perspective.class);
  		query.setParameter("createdBy", username);
  		List<Perspective> perspectives = query.getResultList();
  		

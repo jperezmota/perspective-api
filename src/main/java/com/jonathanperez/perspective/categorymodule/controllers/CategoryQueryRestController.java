@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jonathanperez.perspective.categorymodule.entities.Category;
@@ -22,9 +23,9 @@ public class CategoryQueryRestController {
 	private CategoryQueryService categoryQueryService;
 	
 	@GetMapping("/categories")
-	public List<Category> getCategories(){
+	public List<Category> getCategories(@RequestParam(required = false) String searchTerm){
 		String usernameLogged = UserSessionUtil.getUsername();
-		List<Category> categories = categoryQueryService.getCategories(usernameLogged);
+		List<Category> categories = categoryQueryService.getCategories(usernameLogged, searchTerm);
 		return categories;
 	}
 	

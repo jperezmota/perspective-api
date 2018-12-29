@@ -29,8 +29,8 @@ public class CategoryQueryServiceImpl implements CategoryQueryService {
 	}
 
 	@Override
-	public List<Category> getCategories(String username) {
-		return categoryQueryRepository.getCategories(username);
+	public List<Category> getCategories(String username, String searchTerm) {
+		return categoryQueryRepository.getCategories(username, searchTerm);
 	}
 	
 	@Override

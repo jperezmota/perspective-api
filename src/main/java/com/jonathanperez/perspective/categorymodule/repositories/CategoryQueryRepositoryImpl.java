@@ -27,8 +27,15 @@ public class CategoryQueryRepositoryImpl implements CategoryQueryRepository {
 	}
 
 	@Override
-	public List<Category> getCategories(String username) {
-		Query query = em.createQuery("from Category c where c.createdBy = :createdBy and c.isDeleted = false", Category.class);
+	public List<Category> getCategories(String username, String searchTerm) {
+		String queryString = "from Category c where c.createdBy = :createdBy and c.isDeleted = false";
+ 		
+ 		boolean searchTermIsPresent = searchTerm != null;
+ 		if(searchTermIsPresent) {
+ 			queryString += " and concat(c.id, c.name) like '%" + searchTerm + "%'";	
+ 		}
+ 		
+		Query query = em.createQuery(queryString, Category.class);
 		query.setParameter("createdBy", username);
  		List<Category> categories = query.getResultList();
  		
