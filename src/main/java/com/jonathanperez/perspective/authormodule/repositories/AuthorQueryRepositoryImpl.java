@@ -27,8 +27,15 @@ public class AuthorQueryRepositoryImpl implements AuthorQueryRepository {
 	}
 
 	@Override
-	public List<Author> getAuthors(String username) {
-		Query query = em.createQuery("from Author a where a.createdBy = :createdBy and a.isDeleted = false", Author.class);
+	public List<Author> getAuthors(String username, String searchTerm) {
+		String queryString = "from Author a where a.createdBy = :createdBy and a.isDeleted = false";
+ 		
+ 		boolean searchTermIsPresent = searchTerm != null;
+ 		if(searchTermIsPresent) {
+ 			queryString += " and concat(a.id, a.name) like '%" + searchTerm + "%'";	
+ 		}
+ 		
+		Query query = em.createQuery(queryString, Author.class);
 		query.setParameter("createdBy", username);
  		List<Author> authors = query.getResultList();
  		

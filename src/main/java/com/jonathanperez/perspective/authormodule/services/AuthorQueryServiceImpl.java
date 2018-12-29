@@ -29,8 +29,8 @@ public class AuthorQueryServiceImpl implements AuthorQueryService {
 	}
 
 	@Override
-	public List<Author> getAuthors(String username) {
-		return authorQueryRepository.getAuthors(username);
+	public List<Author> getAuthors(String username, String searchTerm) {
+		return authorQueryRepository.getAuthors(username, searchTerm);
 	}
 
 	@Override

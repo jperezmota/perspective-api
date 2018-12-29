@@ -19,8 +19,8 @@ public class PerspectiveQueryServiceImpl implements PerspectiveQueryService{
 	private PerspectiveQueryRepository perspectiveQueryRepository;
 	
 	@Override
-	public List<Perspective> getPerspectives(String username) {
-		return perspectiveQueryRepository.getPerspectives(username);
+	public List<Perspective> getPerspectives(String username, String searchTerm) {
+		return perspectiveQueryRepository.getPerspectives(username, searchTerm);
 	}
 
 	@Override
